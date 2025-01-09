@@ -31,8 +31,8 @@ import {
 } from "@/components/ui/sidebar"
 
 export function NavUser({
-                            user,
-                        }: {
+        user,
+    }: {
     user: {
         name: string
         email: string
