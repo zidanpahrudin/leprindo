@@ -8,6 +8,7 @@ import {
     SidebarInset,
     SidebarProvider,
 } from "@/components/ui/sidebar"
+import { ThemeSwitch } from "@/components/theme-switch"
 
 
 const topNav = [
@@ -45,6 +46,7 @@ export function AuthenticatedLayout({ children } : any ) {
                     <TopNav links={topNav} />
                     <div className='ml-auto flex items-center space-x-4'>
                         <Search />
+                        <ThemeSwitch />
                         <ProfileDropdown />
                     </div>
                 </Header>
