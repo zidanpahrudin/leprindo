@@ -11,14 +11,13 @@ export default {
     ],
 
     theme: {
-        container: {
-            center: 'true',
-            padding: '2rem',
-            screens: {
-                '2xl': '1400px',
-            },
-        },
-
+    	container: {
+    		center: 'true',
+    		padding: '2rem',
+    		screens: {
+    			'2xl': '1400px'
+    		}
+    	},
     	extend: {
     		borderRadius: {
     			lg: 'var(--radius)',
@@ -59,13 +58,13 @@ export default {
     			border: 'hsl(var(--border))',
     			input: 'hsl(var(--input))',
     			ring: 'hsl(var(--ring))',
-                chart: {
-                    1: 'hsl(var(--chart-1))',
-                    2: 'hsl(var(--chart-2))',
-                    3: 'hsl(var(--chart-3))',
-                    4: 'hsl(var(--chart-4))',
-                    5: 'hsl(var(--chart-5))',
-                },
+    			chart: {
+    				'1': 'hsl(var(--chart-1))',
+    				'2': 'hsl(var(--chart-2))',
+    				'3': 'hsl(var(--chart-3))',
+    				'4': 'hsl(var(--chart-4))',
+    				'5': 'hsl(var(--chart-5))'
+    			},
     			sidebar: {
     				DEFAULT: 'hsl(var(--sidebar-background))',
     				foreground: 'hsl(var(--sidebar-foreground))',

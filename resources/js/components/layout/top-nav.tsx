@@ -7,7 +7,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
-import {Link} from "@inertiajs/react";
+import { Link } from "@inertiajs/react";
 
 interface TopNavProps extends React.HTMLAttributes<HTMLElement> {
   links: {

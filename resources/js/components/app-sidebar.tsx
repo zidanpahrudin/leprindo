@@ -35,17 +35,17 @@ const data = {
     },
     teams: [
         {
-            name: "Acme Inc",
+            name: "XDevLabs",
             logo: GalleryVerticalEnd,
             plan: "Enterprise",
         },
         {
-            name: "Acme Corp.",
+            name: "ZTO Labs",
             logo: AudioWaveform,
             plan: "Startup",
         },
         {
-            name: "Evil Corp.",
+            name: "Zen8Labs",
             logo: Command,
             plan: "Free",
         },
@@ -58,16 +58,20 @@ const data = {
             isActive: true,
             items: [
                 {
-                    title: "History",
-                    url: "#",
+                    title: "Apps",
+                    url: "/apps",
                 },
                 {
-                    title: "Starred",
-                    url: "#",
+                    title: "Chats",
+                    url: "/chats",
                 },
                 {
-                    title: "Settings",
-                    url: "#",
+                    title: "Tasks",
+                    url: "/tasks",
+                },
+                {
+                    title: "Users",
+                    url: "/users",
                 },
             ],
         },
@@ -119,20 +123,24 @@ const data = {
             icon: Settings2,
             items: [
                 {
-                    title: "General",
-                    url: "#",
+                    title: "Account",
+                    url: "/settings/account",
                 },
                 {
-                    title: "Team",
-                    url: "#",
+                    title: "Appearance",
+                    url: "/settings/appearance",
                 },
                 {
-                    title: "Billing",
-                    url: "#",
+                    title: "Display",
+                    url: "/settings/display",
                 },
                 {
-                    title: "Limits",
-                    url: "#",
+                    title: "Notifications",
+                    url: "/settings/notifications",
+                },
+                {
+                    title: "Profile",
+                    url: "/settings/profile",
                 },
             ],
         },

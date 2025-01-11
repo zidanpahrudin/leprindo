@@ -21,7 +21,7 @@ createInertiaApp({
         const root = createRoot(el);
 
         root.render(
-            <StrictMode>
+    <StrictMode>
                 <Providers>
                     <AppLayout>
                         <App {...props} />
