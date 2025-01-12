@@ -4,7 +4,7 @@ import ProfileForm from './profile-form'
 
 export default function SettingsProfile() {
   return (
-      <SettingLayout>
+      <SettingLayout title={"User profile"}>
         <ContentSection
           title='Profile'
           desc='This is how others will see you on the site.'

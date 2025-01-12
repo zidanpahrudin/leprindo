@@ -5,7 +5,7 @@ import { OtpForm } from './components/otp-form'
 
 export default function Otp() {
   return (
-    <AuthLayout>
+    <AuthLayout title={"Two-factor Authentication"}>
       <Card className='p-6'>
         <div className='mb-2 flex flex-col space-y-2 text-left'>
           <h1 className='text-md font-semibold tracking-tight'>

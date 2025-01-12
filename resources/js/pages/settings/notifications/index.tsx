@@ -4,7 +4,7 @@ import { NotificationsForm } from './notifications-form'
 
 export default function SettingsNotifications() {
   return (
-      <SettingLayout>
+      <SettingLayout title={"Notifications Settings"}>
         <ContentSection
           title='Notifications'
           desc='Configure how you receive notifications.'

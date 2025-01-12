@@ -1,5 +1,5 @@
 import React from 'react'
-import { useNavigate } from '@tanstack/react-router'
+import { router } from '@inertiajs/react'
 import {
   IconArrowRightDashed,
   IconDeviceLaptop,
@@ -21,7 +21,6 @@ import { sidebarData } from './layout/data/sidebar-data'
 import { ScrollArea } from './ui/scroll-area'
 
 export function CommandMenu() {
-  const navigate = useNavigate()
   const { setTheme } = useTheme()
   const { open, setOpen } = useSearch()
 
@@ -48,7 +47,7 @@ export function CommandMenu() {
                       key={`${navItem.url}-${i}`}
                       value={navItem.title}
                       onSelect={() => {
-                        runCommand(() => navigate({ to: navItem.url }))
+                        runCommand(() => router.visit(navItem.url ))
                       }}
                     >
                       <div className='mr-2 flex h-4 w-4 items-center justify-center'>
@@ -63,7 +62,7 @@ export function CommandMenu() {
                     key={`${subItem.url}-${i}`}
                     value={subItem.title}
                     onSelect={() => {
-                      runCommand(() => navigate({ to: subItem.url }))
+                      runCommand(() => router.visit(subItem.url ))
                     }}
                   >
                     <div className='mr-2 flex h-4 w-4 items-center justify-center'>

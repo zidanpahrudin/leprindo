@@ -5,7 +5,7 @@ import { SignUpForm } from './components/sign-up-form'
 
 export default function SignUp() {
   return (
-    <AuthLayout>
+    <AuthLayout title={"Create an account"}>
       <Card className='p-6'>
         <div className='mb-2 flex flex-col space-y-2 text-left'>
           <h1 className='text-lg font-semibold tracking-tight'>

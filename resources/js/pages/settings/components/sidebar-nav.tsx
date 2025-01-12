@@ -1,5 +1,5 @@
 import {type JSX, useState} from 'react'
-import {Link, router, usePage} from '@inertiajs/react'
+import {Link, router} from '@inertiajs/react'
 import {cn} from '@/lib/utils'
 import {buttonVariants} from '@/components/ui/button'
 import {ScrollArea} from '@/components/ui/scroll-area'
@@ -18,13 +18,12 @@ export default function SidebarNav({
   items,
   ...props
 }: SidebarNavProps) {
-  const { url } = usePage().props
-  const [val, setVal] = useState<string>(() => {
-    return typeof url === 'string' ? url : '/settings'
+  const [currentUrl, setCurrentUrl] = useState<string>(() => {
+    return window.location.pathname
   })
 
   const handleSelect = (e: string) => {
-    setVal(e)
+    setCurrentUrl(e)
     router.visit(e, {
       preserveScroll: true,
       preserveState: true
@@ -34,7 +33,7 @@ export default function SidebarNav({
   return (
     <>
       <div className='p-1 md:hidden'>
-        <Select value={val} onValueChange={handleSelect}>
+        <Select value={currentUrl} onValueChange={handleSelect}>
           <SelectTrigger className='h-12 sm:w-48'>
             <SelectValue placeholder='Theme' />
           </SelectTrigger>
@@ -68,7 +67,7 @@ export default function SidebarNav({
               href={item.href}
               className={cn(
                 buttonVariants({ variant: 'ghost' }),
-                url === item.href
+                  currentUrl === item.href
                   ? 'bg-muted hover:bg-muted'
                   : 'hover:bg-transparent hover:underline',
                 'justify-start'

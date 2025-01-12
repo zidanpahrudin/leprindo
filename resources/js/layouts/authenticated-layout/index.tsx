@@ -39,21 +39,27 @@ const topNav = [
   },
 ]
 
-export function AuthenticatedLayout({children, title}: any) {
+export function AuthenticatedLayout({
+    children,
+    title,
+    showHeader = true,
+    withTopNav = true,
+  }: any) {
   return (
     <>
-      <Head title={ title ?? 'Dashboard' }/>
+      <Head title={title ?? 'Dashboard'}/>
       <SidebarProvider>
         <AppSidebar/>
         <SidebarInset>
-          <Header>
-            <TopNav links={topNav}/>
+          {showHeader && <Header>
+            {withTopNav && <TopNav links={topNav}/>}
+            {!withTopNav && <Search/>}
             <div className='ml-auto flex items-center space-x-4'>
-              <Search/>
+              {withTopNav && <Search/>}
               <ThemeSwitch/>
               <ProfileDropdown/>
             </div>
-          </Header>
+          </Header>}
 
           {children}
         </SidebarInset>
