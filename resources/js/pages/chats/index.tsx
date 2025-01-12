@@ -21,7 +21,6 @@ import { Button } from '@/components/ui/button'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { Separator } from '@/components/ui/separator'
 import { Main } from '@/components/layout/main'
-import { Head } from "@inertiajs/react"
 // Fake Data
 import { conversations } from './data/convo.json'
 
@@ -59,8 +58,7 @@ export default function Chats() {
 
   return (
     <>
-      <Head title='Chats' />
-      <AuthenticatedLayout>
+      <AuthenticatedLayout title={"Chats"}>
           <Main fixed>
             <section className='flex h-full gap-6'>
               {/* Left Side */}

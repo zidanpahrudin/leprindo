@@ -13,7 +13,7 @@ import SidebarNav from './components/sidebar-nav'
 export default function Settings({ children } : any) {
   return (
     <>
-    <AuthenticatedLayout>
+    <AuthenticatedLayout title={"Settings"}>
       <Main fixed>
         <div className='space-y-0.5'>
           <h1 className='text-2xl font-bold tracking-tight md:text-3xl'>

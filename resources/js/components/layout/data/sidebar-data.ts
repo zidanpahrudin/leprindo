@@ -98,7 +98,7 @@ export const sidebarData: SidebarData = {
             },
             {
               title: 'Forgot Password',
-              url: '/forgot-password',
+              url: '/forgot-pass',
             },
             {
               title: 'OTP',
