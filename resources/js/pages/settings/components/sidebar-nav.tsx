@@ -1,16 +1,9 @@
-import { useState, type JSX } from 'react'
-import { useLocation, useNavigate } from '@tanstack/react-router'
-import { Link } from '@inertiajs/react'
-import { cn } from '@/lib/utils'
-import { buttonVariants } from '@/components/ui/button'
-import { ScrollArea } from '@/components/ui/scroll-area'
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select'
+import {type JSX, useState} from 'react'
+import {Link, router, usePage} from '@inertiajs/react'
+import {cn} from '@/lib/utils'
+import {buttonVariants} from '@/components/ui/button'
+import {ScrollArea} from '@/components/ui/scroll-area'
+import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue,} from '@/components/ui/select'
 
 interface SidebarNavProps extends React.HTMLAttributes<HTMLElement> {
   items: {
@@ -25,13 +18,17 @@ export default function SidebarNav({
   items,
   ...props
 }: SidebarNavProps) {
-  const { pathname } = useLocation()
-  const navigate = useNavigate()
-  const [val, setVal] = useState(pathname ?? '/settings')
+  const { url } = usePage().props
+  const [val, setVal] = useState<string>(() => {
+    return typeof url === 'string' ? url : '/settings'
+  })
 
   const handleSelect = (e: string) => {
     setVal(e)
-    navigate({ to: e })
+    router.visit(e, {
+      preserveScroll: true,
+      preserveState: true
+    })
   }
 
   return (
@@ -55,7 +52,6 @@ export default function SidebarNav({
       </div>
 
       <ScrollArea
-        // orientation='horizontal'
         type='always'
         className='hidden w-full bg-background px-1 py-2 md:block min-w-40'
       >
@@ -72,7 +68,7 @@ export default function SidebarNav({
               href={item.href}
               className={cn(
                 buttonVariants({ variant: 'ghost' }),
-                pathname === item.href
+                url === item.href
                   ? 'bg-muted hover:bg-muted'
                   : 'hover:bg-transparent hover:underline',
                 'justify-start'

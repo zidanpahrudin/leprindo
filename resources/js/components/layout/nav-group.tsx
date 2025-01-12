@@ -1,6 +1,6 @@
 import { ReactNode } from 'react'
-import { useLocation } from '@tanstack/react-router'
-import { Link } from "@inertiajs/react"
+// import { useLocation } from '@tanstack/react-router'
+import { Link, usePage } from "@inertiajs/react"
 import { ChevronRight } from 'lucide-react'
 import {
   Collapsible,
@@ -31,7 +31,8 @@ import { NavCollapsible, NavItem, NavLink, type NavGroup } from './types'
 
 export function NavGroup({ title, items }: NavGroup) {
   const { state } = useSidebar()
-  const href = useLocation({ select: (location) => location.href })
+  // const href = useLocation({ select: (location) => location.href })
+    const { url: href } = usePage()
   return (
     <SidebarGroup>
       <SidebarGroupLabel>{title}</SidebarGroupLabel>

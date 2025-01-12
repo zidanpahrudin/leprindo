@@ -6,7 +6,6 @@ import {
 } from '@tabler/icons-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import {Head} from "@inertiajs/react"
 import {
   Select,
   SelectContent,

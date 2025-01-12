@@ -82,7 +82,7 @@ export default function Chats() {
                     <span className='sr-only'>Search</span>
                     <input
                       type='text'
-                      className='w-full flex-1 bg-inherit text-sm focus-visible:outline-none'
+                      className='w-full flex-1 bg-inherit text-sm focus-visible:outline-none border-none focus:ring-0'
                       placeholder='Search chat...'
                       value={search}
                       onChange={(e) => setSearch(e.target.value)}
@@ -271,7 +271,7 @@ export default function Chats() {
                         <input
                           type='text'
                           placeholder='Type your messages...'
-                          className='h-8 w-full bg-inherit focus-visible:outline-none'
+                          className='h-8 w-full border-none focus:ring-0 focus:border-none bg-inherit focus-visible:outline-none'
                         />
                       </label>
                       <Button
