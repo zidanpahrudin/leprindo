@@ -7,7 +7,6 @@ import {resolvePageComponent} from 'laravel-vite-plugin/inertia-helpers';
 import {createRoot} from 'react-dom/client';
 import {AppLayout} from "./layouts"
 import {Providers} from "./providers"
-import {SearchProvider} from "@/context/search-context";
 
 const appName = import.meta.env.VITE_APP_NAME || 'Shadcn Laravel Admin';
 
@@ -24,11 +23,9 @@ createInertiaApp({
     root.render(
       <StrictMode>
         <Providers>
-          <SearchProvider>
-            <AppLayout>
-              <App {...props} />
-            </AppLayout>
-          </SearchProvider>
+          <AppLayout>
+            <App {...props} />
+          </AppLayout>
         </Providers>
       </StrictMode>
     )
