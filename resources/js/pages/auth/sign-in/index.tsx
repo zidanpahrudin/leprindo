@@ -1,8 +1,30 @@
 import { Card } from '@/components/ui/card'
 import AuthLayout from '../auth-layout'
 import { UserAuthForm } from './components/user-auth-form'
+import {useForm} from "@inertiajs/react"
+import {FormEventHandler} from "react";
 
-export default function SignIn() {
+export default function SignIn({
+  status,
+  canResetPassword,
+}: {
+  status?: string;
+  canResetPassword: boolean;
+}) {
+
+  const { data, setData, post, processing, errors, reset } = useForm({
+    email: '',
+    password: '',
+    remember: false,
+  });
+
+  const submit: FormEventHandler = (e) => {
+    e.preventDefault();
+
+    post(route('login'), {
+      onFinish: () => reset('password'),
+    });
+  }
   return (
     <AuthLayout title={"Login"}>
       <Card className='p-6'>
