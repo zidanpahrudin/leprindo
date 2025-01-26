@@ -2,6 +2,7 @@ import { Link } from '@inertiajs/react'
 import { Card } from '@/components/ui/card'
 import AuthLayout from '../auth-layout'
 import { SignUpForm } from './components/sign-up-form'
+import SocialButtons from '../components/social-buttons'
 
 export default function SignUp() {
   return (
@@ -40,6 +41,7 @@ export default function SignUp() {
           </a>
           .
         </p>
+        <SocialButtons isLoading={false} />
       </Card>
     </AuthLayout>
   )

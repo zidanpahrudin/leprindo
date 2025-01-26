@@ -3,6 +3,7 @@ import AuthLayout from '../auth-layout'
 import { UserAuthForm } from './components/user-auth-form'
 import {useForm} from "@inertiajs/react"
 import {FormEventHandler} from "react";
+import SocialButtons from '../components/social-buttons'
 
 export default function SignIn({
   status,
@@ -53,6 +54,7 @@ export default function SignIn({
           </a>
           .
         </p>
+        <SocialButtons isLoading={false}/>
       </Card>
     </AuthLayout>
   )
