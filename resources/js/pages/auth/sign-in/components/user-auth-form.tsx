@@ -49,9 +49,14 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
     // eslint-disable-next-line no-console
     console.log(data)
 
-    setTimeout(() => {
+    post(route('login'), {
+      onFinish: () => reset('password'),
       setIsLoading(false)
-    }, 3000)
+    });
+
+    // setTimeout(() => {
+    //   setIsLoading(false)
+    // }, 3000)
   }
 
   return (
