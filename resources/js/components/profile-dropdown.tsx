@@ -11,7 +11,7 @@ import {
   DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
-import {Link} from "@inertiajs/react";
+import {Link} from "@inertiajs/react"
 
 export function ProfileDropdown() {
   return (
@@ -57,7 +57,7 @@ export function ProfileDropdown() {
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuItem>
-          Log out
+          <Link className="block w-full text-left" href={route('logout')} method="post" as="button">Log out</Link>
           <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
         </DropdownMenuItem>
       </DropdownMenuContent>
