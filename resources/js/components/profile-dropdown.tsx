@@ -11,15 +11,16 @@ import {
   DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
-import {Link} from "@inertiajs/react"
+import {Link, usePage} from "@inertiajs/react"
 
 export function ProfileDropdown() {
+  const {auth} = usePage().props
   return (
     <DropdownMenu modal={false}>
       <DropdownMenuTrigger asChild>
         <Button variant='ghost' className='relative h-8 w-8 rounded-full'>
           <Avatar className='h-8 w-8'>
-            <AvatarImage src='/avatars/01.png' alt='@shadcn' />
+            <AvatarImage src='/avatars/01.png' alt={`@${auth?.user?.name}`} />
             <AvatarFallback>SN</AvatarFallback>
           </Avatar>
         </Button>
@@ -27,9 +28,9 @@ export function ProfileDropdown() {
       <DropdownMenuContent className='w-56' align='end' forceMount>
         <DropdownMenuLabel className='font-normal'>
           <div className='flex flex-col space-y-1'>
-            <p className='text-sm font-medium leading-none'>binjuhor</p>
+            <p className='text-sm font-medium leading-none'>{auth?.user?.name}</p>
             <p className='text-xs leading-none text-muted-foreground'>
-              hi@binjuhor.com
+              {auth?.user?.email}
             </p>
           </div>
         </DropdownMenuLabel>
