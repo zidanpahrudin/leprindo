@@ -1,8 +1,8 @@
-import { HTMLAttributes } from 'react'
+import { HTMLAttributes, useState } from 'react'
 import { z } from 'zod'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Link, useForm as useInertiaForm } from '@inertiajs/react'
+import { Link } from '@inertiajs/react'
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 import {
@@ -15,12 +15,8 @@ import {
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { PasswordInput } from '@/components/password-input'
-import { Checkbox } from '@/components/ui/checkbox'
 
-type UserAuthFormProps = HTMLAttributes<HTMLDivElement> & {
-  status?: string;
-  canResetPassword?: boolean;
-}
+type UserAuthFormProps = HTMLAttributes<HTMLDivElement>
 
 const formSchema = z.object({
   email: z
@@ -37,112 +33,70 @@ const formSchema = z.object({
     }),
 })
 
-export function UserAuthForm({ className, status, canResetPassword = true, ...props }: UserAuthFormProps) {
-  const { post, processing, errors: inertiaErrors, reset } = useInertiaForm({
-    email: '',
-    password: '',
-    remember: false,
-  });
+export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
+  const [isLoading, setIsLoading] = useState(false)
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       email: '',
       password: '',
-      remember: false
     },
   })
 
   function onSubmit(data: z.infer<typeof formSchema>) {
-    post(route('login'), {
-      onFinish: () => {
-        reset('password');
-        form.reset();
-      },
-    });
+    setIsLoading(true)
+    // eslint-disable-next-line no-console
+    console.log(data)
+
+    setTimeout(() => {
+      setIsLoading(false)
+    }, 3000)
   }
 
   return (
     <div className={cn('grid gap-6', className)} {...props}>
-      {status && (
-        <div className="text-sm font-medium text-green-600">
-          {status}
-        </div>
-      )}
-
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
           <div className='grid gap-2'>
             <FormField
               control={form.control}
               name='email'
-              render={({field}) => (
+              render={({ field }) => (
                 <FormItem className='space-y-1'>
                   <FormLabel>Email</FormLabel>
                   <FormControl>
-                    <Input
-                      placeholder='name@example.com'
-                      {...field}
-                      autoComplete="username"
-                    />
+                    <Input placeholder='name@example.com' {...field} />
                   </FormControl>
-                  <FormMessage>
-                    {inertiaErrors.email}
-                  </FormMessage>
+                  <FormMessage />
                 </FormItem>
               )}
             />
             <FormField
               control={form.control}
               name='password'
-              render={({field}) => (
+              render={({ field }) => (
                 <FormItem className='space-y-1'>
                   <div className='flex items-center justify-between'>
                     <FormLabel>Password</FormLabel>
-                    {canResetPassword && (
-                      <Link
-                        href={route('password.request')}
-                        className='text-sm font-medium text-muted-foreground hover:opacity-75'
-                      >
-                        Forgot password?
-                      </Link>
-                    )}
+                    <Link
+                      href='/forgot-password'
+                      className='text-sm font-medium text-muted-foreground hover:opacity-75'
+                    >
+                      Forgot password?
+                    </Link>
                   </div>
                   <FormControl>
-                    <PasswordInput
-                      placeholder='********'
-                      {...field}
-                      autoComplete="current-password"
-                    />
+                    <PasswordInput placeholder='********' {...field} />
                   </FormControl>
-                  <FormMessage>
-                    {inertiaErrors.password}
-                  </FormMessage>
+                  <FormMessage />
                 </FormItem>
               )}
             />
-
-            <FormField
-              control={form.control}
-              name="remember"
-              render={({field}) => (
-                <FormItem className="flex flex-row items-center space-x-2 space-y-0 mt-2">
-                  <FormControl>
-                    <Checkbox
-                      checked={field?.value}
-                      onCheckedChange={field.onChange}
-                    />
-                  </FormControl>
-                  <FormLabel className="text-sm font-normal text-muted-foreground">
-                    Remember me
-                  </FormLabel>
-                </FormItem>
-              )}
-            />
-
-            <Button className='mt-4' disabled={processing}>
+            <Button className='mt-2' disabled={isLoading}>
               Login
             </Button>
+
           </div>
         </form>
       </Form>
