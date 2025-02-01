@@ -1,8 +1,5 @@
-import { HTMLAttributes, useState } from 'react'
-import { z } from 'zod'
-import { useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { Link } from '@inertiajs/react'
+import { HTMLAttributes, useEffect } from 'react'
+import { Link, useForm as useInertiaForm } from '@inertiajs/react'
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 import {
@@ -15,49 +12,64 @@ import {
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { PasswordInput } from '@/components/password-input'
+import { Checkbox } from '@/components/ui/checkbox'
+import { useForm } from 'react-hook-form'
 
-type UserAuthFormProps = HTMLAttributes<HTMLDivElement>
+type UserAuthFormProps = HTMLAttributes<HTMLDivElement> & {
+  status?: string;
+  canResetPassword?: boolean;
+}
 
-const formSchema = z.object({
-  email: z
-    .string()
-    .min(1, { message: 'Please enter your email' })
-    .email({ message: 'Invalid email address' }),
-  password: z
-    .string()
-    .min(1, {
-      message: 'Please enter your password',
-    })
-    .min(7, {
-      message: 'Password must be at least 7 characters long',
-    }),
-})
+export function UserAuthForm({ className, status, canResetPassword = true, ...props }: UserAuthFormProps) {
+  // Inertia form handling
+  const { data, setData, post, processing, errors: inertiaErrors, reset } = useInertiaForm({
+    email: '',
+    password: '',
+    remember: false,
+  });
 
-export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
-  const [isLoading, setIsLoading] = useState(false)
-
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const form = useForm({
     defaultValues: {
       email: '',
       password: '',
+      remember: false
     },
   })
 
-  function onSubmit(data: z.infer<typeof formSchema>) {
-    setIsLoading(true)
-    // eslint-disable-next-line no-console
-    console.log(data)
+  // Keep both forms in sync
+  useEffect(() => {
+    const subscription = form.watch((value) => {
+      if (value.email !== undefined) setData('email', value.email);
+      if (value.password !== undefined) setData('password', value.password);
+      if (value.remember !== undefined) setData('remember', value.remember);
+    });
+    return () => subscription.unsubscribe();
+  }, [form.watch, setData]);
 
-    setTimeout(() => {
-      setIsLoading(false)
-    }, 3000)
+  function onSubmit(formData: any) {
+    post(route('login'), {
+      onFinish: () => {
+        reset('password');
+        form.reset({
+          ...form.getValues(),
+          password: ''
+        });
+      },
+      // Preserve the scroll position
+      preserveScroll: true,
+    });
   }
 
   return (
     <div className={cn('grid gap-6', className)} {...props}>
+      {status && (
+        <div className="text-sm font-medium text-green-600">
+          {status}
+        </div>
+      )}
+
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)}>
+        <form onSubmit={form.handleSubmit(onSubmit)} noValidate>
           <div className='grid gap-2'>
             <FormField
               control={form.control}
@@ -66,9 +78,23 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
                 <FormItem className='space-y-1'>
                   <FormLabel>Email</FormLabel>
                   <FormControl>
-                    <Input placeholder='name@example.com' {...field} />
+                    <Input
+                      placeholder='name@example.com'
+                      {...field}
+                      autoComplete="username"
+                      value={data.email}
+                      onChange={(e) => {
+                        field.onChange(e);
+                        setData('email', e.target.value);
+                      }}
+                      aria-invalid={!!inertiaErrors.email}
+                    />
                   </FormControl>
-                  <FormMessage />
+                  {inertiaErrors.email && (
+                    <FormMessage>
+                      {inertiaErrors.email}
+                    </FormMessage>
+                  )}
                 </FormItem>
               )}
             />
@@ -79,24 +105,61 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
                 <FormItem className='space-y-1'>
                   <div className='flex items-center justify-between'>
                     <FormLabel>Password</FormLabel>
-                    <Link
-                      href='/forgot-password'
-                      className='text-sm font-medium text-muted-foreground hover:opacity-75'
-                    >
-                      Forgot password?
-                    </Link>
+                    {canResetPassword && (
+                      <Link
+                        href={route('password.request')}
+                        className='text-sm font-medium text-muted-foreground hover:opacity-75'
+                      >
+                        Forgot password?
+                      </Link>
+                    )}
                   </div>
                   <FormControl>
-                    <PasswordInput placeholder='********' {...field} />
+                    <PasswordInput
+                      placeholder='********'
+                      {...field}
+                      autoComplete="current-password"
+                      value={data.password}
+                      onChange={(e) => {
+                        field.onChange(e);
+                        setData('password', e.target.value);
+                      }}
+                      aria-invalid={!!inertiaErrors.password}
+                    />
                   </FormControl>
-                  <FormMessage />
+                  {inertiaErrors.password && (
+                    <FormMessage>
+                      {inertiaErrors.password}
+                    </FormMessage>
+                  )}
                 </FormItem>
               )}
             />
-            <Button className='mt-2' disabled={isLoading}>
-              Login
-            </Button>
 
+            <FormField
+              control={form.control}
+              name="remember"
+              render={({ field }) => (
+                <FormItem className="flex flex-row items-center space-x-2 space-y-0 mt-2">
+                  <FormControl>
+                    <Checkbox
+                      checked={data.remember}
+                      onCheckedChange={(checked) => {
+                        field.onChange(checked);
+                        setData('remember', checked as boolean);
+                      }}
+                    />
+                  </FormControl>
+                  <FormLabel className="text-sm font-normal text-muted-foreground">
+                    Remember me
+                  </FormLabel>
+                </FormItem>
+              )}
+            />
+
+            <Button className='mt-4' disabled={processing}>
+              {processing ? 'Logging in...' : 'Login'}
+            </Button>
           </div>
         </form>
       </Form>
