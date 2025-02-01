@@ -13,13 +13,5 @@ export default defineConfig(({ mode }) => {
       }),
       react(),
     ],
-    server: {
-      cors: true,
-      hmr: {
-        host: new URL(env.VITE_APP_URL).hostname
-      },
-      host: true,
-      port: 5173,
-    },
   }
 });
