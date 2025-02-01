@@ -13,7 +13,7 @@ export default function SignIn({
   canResetPassword: boolean;
 }) {
 
-  const { data, setData, post, processing, errors, reset } = useForm({
+  const { post, reset } = useForm({
     email: '',
     password: '',
     remember: false,
@@ -36,7 +36,7 @@ export default function SignIn({
             to log into your account
           </p>
         </div>
-        <UserAuthForm />
+        <UserAuthForm canResetPassword={canResetPassword} status={status} />
         <p className='mt-4 px-8 text-center text-sm text-muted-foreground'>
           By clicking login, you agree to our{' '}
           <a

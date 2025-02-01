@@ -2,10 +2,16 @@ import ViteLogo from '@/assets/vite.svg'
 import { UserAuthForm } from './components/user-auth-form'
 import { Head } from '@inertiajs/react'
 
-export default function SignIn2() {
+export default function SignIn2({
+    status,
+    canResetPassword,
+  }: {
+  status?: string;
+  canResetPassword: boolean;
+}) {
   return (
     <>
-      <Head title='Login 2'/>
+      <Head title='Login'/>
       <div
         className='container relative grid h-svh flex-col items-center justify-center lg:max-w-none lg:grid-cols-2 lg:px-0'>
         <div className='relative hidden h-full flex-col bg-muted p-10 text-white dark:border-r lg:flex'>
@@ -54,7 +60,7 @@ export default function SignIn2() {
                 to log into your account
               </p>
             </div>
-            <UserAuthForm/>
+            <UserAuthForm canResetPassword={canResetPassword} status={status} />
             <p className='px-8 text-center text-sm text-muted-foreground'>
               By clicking login, you agree to our{' '}
               <a
