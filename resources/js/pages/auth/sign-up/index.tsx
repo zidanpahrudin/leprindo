@@ -16,10 +16,10 @@ export default function SignUp() {
             Enter your email and password to create an account. <br />
             Already have an account?{' '}
             <Link
-              href='/sign-in'
+              href={route('login')}
               className='underline underline-offset-4 hover:text-primary'
             >
-              Sign In
+              Login
             </Link>
           </p>
         </div>

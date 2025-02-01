@@ -1,6 +1,7 @@
 import ViteLogo from '@/assets/vite.svg'
 import { UserAuthForm } from './components/user-auth-form'
 import { Head } from '@inertiajs/react'
+import SocialButtons from "@/pages/auth/components/social-buttons";
 
 export default function SignIn2({
     status,
@@ -78,6 +79,7 @@ export default function SignIn2({
               </a>
               .
             </p>
+            <SocialButtons isLoading={false}/>
           </div>
         </div>
       </div>
