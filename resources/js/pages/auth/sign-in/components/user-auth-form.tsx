@@ -109,6 +109,7 @@ export function UserAuthForm({ className, status, canResetPassword = true, ...pr
                       <Link
                         href={route('password.request')}
                         className='text-sm font-medium text-muted-foreground hover:opacity-75'
+                        tabIndex={1}
                       >
                         Forgot password?
                       </Link>
