@@ -18,10 +18,12 @@ Route::get('/dashboard', function () {
     return Inertia::render('dashboard/index');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/apps', fn () => Inertia::render('apps/index'))->middleware(['auth', 'verified']);
-Route::get('/chats', fn () => Inertia::render('chats/index'))->middleware(['auth', 'verified']);
-Route::get('/tasks', fn () => Inertia::render('tasks/index'))->middleware(['auth', 'verified']);
-Route::get('/users', fn () => Inertia::render('users/index'))->middleware(['auth', 'verified']);
+Route::middleware('auth')->group(function () {
+  Route::get('/apps', fn () => Inertia::render('apps/index'));
+  Route::get('/chats', fn () => Inertia::render('chats/index'));
+  Route::get('/tasks', fn () => Inertia::render('tasks/index'));
+  Route::get('/users', fn () => Inertia::render('users/index'));
+});
 Route::get('/sign-in', fn () => Inertia::render('auth/sign-in/index'));
 Route::get('/sign-in-2', fn () => Inertia::render('auth/sign-in/sign-in-2'));
 Route::get('/sign-up', fn () => Inertia::render('auth/sign-up/index'));
@@ -47,6 +49,6 @@ Route::middleware('/auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-})->middleware(['auth', 'verified']);
+});
 
 require __DIR__.'/auth.php';
