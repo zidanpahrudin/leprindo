@@ -45,7 +45,7 @@ Route::group(['prefix' => '/settings'], function () {
     Route::get('/profile', fn () => Inertia::render('settings/profile/index'))->name('app.todo');
 })->middleware(['auth', 'verified']);
 
-Route::middleware('/auth')->group(function () {
+Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
