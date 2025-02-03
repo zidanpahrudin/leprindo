@@ -21,10 +21,9 @@ type UserAuthFormProps = HTMLAttributes<HTMLDivElement> & {
 }
 
 export function UserAuthForm({ className, status, canResetPassword = true, ...props }: UserAuthFormProps) {
-  // Inertia form handling
   const { data, setData, post, processing, errors: inertiaErrors, reset } = useInertiaForm({
-    email: '',
-    password: '',
+    email: 'shadcn@gmail.com',
+    password: 'password',
     remember: false,
   });
 
@@ -36,7 +35,6 @@ export function UserAuthForm({ className, status, canResetPassword = true, ...pr
     },
   })
 
-  // Keep both forms in sync
   useEffect(() => {
     const subscription = form.watch((value) => {
       if (value.email !== undefined) setData('email', value.email);
@@ -55,7 +53,6 @@ export function UserAuthForm({ className, status, canResetPassword = true, ...pr
           password: ''
         });
       },
-      // Preserve the scroll position
       preserveScroll: true,
     });
   }
