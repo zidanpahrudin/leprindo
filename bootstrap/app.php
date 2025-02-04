@@ -3,6 +3,8 @@
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
+use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -15,9 +17,34 @@ return Application::configure(basePath: dirname(__DIR__))
             \App\Http\Middleware\HandleInertiaRequests::class,
             \Illuminate\Http\Middleware\AddLinkHeadersForPreloadedAssets::class,
         ]);
-
         //
     })
     ->withExceptions(function (Exceptions $exceptions) {
-        //
+      $exceptions->respond(function ($response, Throwable $exception, Request $request) {
+        $shouldRenderError = !app()->environment(['local', 'testing'])
+          && in_array($response->getStatusCode(), [500, 503, 404, 403, 401]);
+          $errorComponents = [
+            '401' => 'errors/unauthorized-error',
+            '403' => 'errors/forbidden',
+            '404' => 'errors/not-found-error',
+            '500' => 'errors/general-error',
+            '503' => 'errors/maintenance-error',
+            'default' => 'errors/general-error',
+          ];
+          $component = $errorComponents[$exception->getStatusCode()] ?? 'errors/general-error';
+//            $isDashboard = $request->is('dashboard/*');
+
+        if ($shouldRenderError) {
+          return Inertia::render($component, ['status' => $response->getStatusCode()])
+//                    ->rootView($isDashboard ? 'dashboard' : 'app')
+            ->toResponse($request)
+            ->setStatusCode($response->getStatusCode());
+        } elseif ($response->getStatusCode() === 419) {
+          return back()->with([
+            'message' => 'The page expired, please try again.',
+          ]);
+        }
+
+        return $response;
+      });
     })->create();
