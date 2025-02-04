@@ -29,7 +29,6 @@ return Application::configure(basePath: dirname(__DIR__))
             '404' => 'errors/not-found-error',
             '500' => 'errors/general-error',
             '503' => 'errors/maintenance-error',
-            'default' => 'errors/general-error',
           ];
           $component = $errorComponents[$exception->getStatusCode()] ?? 'errors/general-error';
 //            $isDashboard = $request->is('dashboard/*');
