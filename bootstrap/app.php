@@ -30,7 +30,7 @@ return Application::configure(basePath: dirname(__DIR__))
             '500' => 'errors/general-error',
             '503' => 'errors/maintenance-error',
           ];
-          $component = $errorComponents[$exception->getStatusCode()] ?? 'errors/general-error';
+          $component = $shouldRenderError ? $errorComponents[$response->getStatusCode()] : 'errors/general-error';
 //            $isDashboard = $request->is('dashboard/*');
 
         if ($shouldRenderError) {
