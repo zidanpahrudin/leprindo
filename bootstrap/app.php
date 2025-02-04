@@ -17,12 +17,13 @@ return Application::configure(basePath: dirname(__DIR__))
             \App\Http\Middleware\HandleInertiaRequests::class,
             \Illuminate\Http\Middleware\AddLinkHeadersForPreloadedAssets::class,
         ]);
-        //
     })
     ->withExceptions(function (Exceptions $exceptions) {
       $exceptions->respond(function ($response, Throwable $exception, Request $request) {
         $shouldRenderError = !app()->environment(['local', 'testing'])
           && in_array($response->getStatusCode(), [500, 503, 404, 403, 401]);
+
+        if ($shouldRenderError) {
           $errorComponents = [
             '401' => 'errors/unauthorized-error',
             '403' => 'errors/forbidden',
@@ -30,12 +31,9 @@ return Application::configure(basePath: dirname(__DIR__))
             '500' => 'errors/general-error',
             '503' => 'errors/maintenance-error',
           ];
-          $component = $shouldRenderError ? $errorComponents[$response->getStatusCode()] : 'errors/general-error';
-//            $isDashboard = $request->is('dashboard/*');
+          $component = $errorComponents[$response->getStatusCode()] ?? 'errors/general-error';
 
-        if ($shouldRenderError) {
           return Inertia::render($component, ['status' => $response->getStatusCode()])
-//                    ->rootView($isDashboard ? 'dashboard' : 'app')
             ->toResponse($request)
             ->setStatusCode($response->getStatusCode());
         } elseif ($response->getStatusCode() === 419) {
