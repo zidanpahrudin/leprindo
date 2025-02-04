@@ -56,23 +56,23 @@ export const sidebarData: SidebarData = {
         },
         {
           title: 'Tasks',
-          url: '/tasks',
+          url: '/dashboard/tasks',
           icon: IconChecklist,
         },
         {
           title: 'Apps',
-          url: '/apps',
+          url: '/dashboard/apps',
           icon: IconPackages,
         },
         {
           title: 'Chats',
-          url: '/chats',
+          url: '/dashboard/chats',
           badge: '3',
           icon: IconMessages,
         },
         {
           title: 'Users',
-          url: '/users',
+          url: '/dashboard/users',
           icon: IconUsers,
         },
       ],
@@ -148,34 +148,34 @@ export const sidebarData: SidebarData = {
           items: [
             {
               title: 'Profile',
-              url: '/settings',
+              url: '/dashboard/settings',
               icon: IconUserCog,
             },
             {
               title: 'Account',
-              url: '/settings/account',
+              url: '/dashboard/settings/account',
               icon: IconTool,
             },
             {
               title: 'Appearance',
-              url: '/settings/appearance',
+              url: '/dashboard/settings/appearance',
               icon: IconPalette,
             },
             {
               title: 'Notifications',
-              url: '/settings/notifications',
+              url: '/dashboard/settings/notifications',
               icon: IconNotification,
             },
             {
               title: 'Display',
-              url: '/settings/display',
+              url: '/dashboard/settings/display',
               icon: IconBrowserCheck,
             },
           ],
         },
         {
           title: 'Help Center',
-          url: '/help-center',
+          url: '/dashboard/help-center',
           icon: IconHelp,
         },
       ],
