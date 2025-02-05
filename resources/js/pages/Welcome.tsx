@@ -1,33 +1,16 @@
 import { PageProps } from '@/types';
 import { Head, Link } from '@inertiajs/react';
 import * as React from "react"
-
-import {
-    Accordion,
-    AccordionContent,
-    AccordionItem,
-    AccordionTrigger,
-} from "@/components/ui/accordion"
+import PrimaryButton from '@/components/PrimaryButton';
 
 export default function Welcome({
     auth,
     laravelVersion,
     phpVersion,
 }: PageProps<{ laravelVersion: string; phpVersion: string }>) {
-    const handleImageError = () => {
-        document
-            .getElementById('screenshot-container')
-            ?.classList.add('!hidden');
-        document.getElementById('docs-card')?.classList.add('!row-span-1');
-        document
-            .getElementById('docs-card-content')
-            ?.classList.add('!flex-row');
-        document.getElementById('background')?.classList.add('!hidden');
-    };
-
     return (
         <>
-            <Head title="Welcome" />
+            <Head title="Welcome to Shadcn Admin Laravel version" />
             <div className="bg-gray-50 text-black/50 dark:bg-black dark:text-white/50">
                 <img
                     id="background"
@@ -50,56 +33,34 @@ export default function Welcome({
                                     />
                                 </svg>
                             </div>
-                            <nav className="-mx-3 flex flex-1 justify-end">
-                                {auth.user ? (
-                                    <Link
-                                        href={route('dashboard')}
-                                        className="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
-                                    >
-                                        Dashboard
-                                    </Link>
-                                ) : (
-                                    <>
-                                        <Link
-                                            href={route('login')}
-                                            className="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
-                                        >
-                                            Log in
-                                        </Link>
-                                        <Link
-                                            href={route('register')}
-                                            className="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
-                                        >
-                                            Register
-                                        </Link>
-                                    </>
-                                )}
-                            </nav>
                         </header>
 
                         <main className="mt-6">
-                            <Accordion type="single" collapsible className="w-full">
-                                <AccordionItem value="item-1">
-                                    <AccordionTrigger>Is it accessible?</AccordionTrigger>
-                                    <AccordionContent>
-                                        Yes. It adheres to the WAI-ARIA design pattern.
-                                    </AccordionContent>
-                                </AccordionItem>
-                                <AccordionItem value="item-2">
-                                    <AccordionTrigger>Is it styled?</AccordionTrigger>
-                                    <AccordionContent>
-                                        Yes. It comes with default styles that matches the other
-                                        components&apos; aesthetic.
-                                    </AccordionContent>
-                                </AccordionItem>
-                                <AccordionItem value="item-3">
-                                    <AccordionTrigger>Is it animated?</AccordionTrigger>
-                                    <AccordionContent>
-                                        Yes. It&apos;s animated by default, but you can disable it if you
-                                        prefer.
-                                    </AccordionContent>
-                                </AccordionItem>
-                            </Accordion>
+                          <nav className="-mx-3 flex flex-1 justify-center">
+                            {auth.user ? (
+                              <Link
+                                href={route('dashboard')}
+                                className="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
+                              >
+                                <PrimaryButton>Dashboard</PrimaryButton>
+                              </Link>
+                            ) : (
+                              <>
+                                <Link
+                                  href={route('login')}
+                                  className="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
+                                >
+                                  <PrimaryButton>Log in</PrimaryButton>
+                                </Link>
+                                <Link
+                                  href={route('register')}
+                                  className="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
+                                >
+                                  <PrimaryButton>Register</PrimaryButton>
+                                </Link>
+                              </>
+                            )}
+                          </nav>
                         </main>
 
                         <footer className="py-16 text-center text-sm text-black dark:text-white/70">
