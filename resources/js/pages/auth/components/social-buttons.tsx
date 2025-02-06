@@ -1,7 +1,7 @@
 import {Button} from "@/components/ui/button"
 import {IconBrandFacebook, IconBrandGithub} from "@tabler/icons-react"
 
-export default function socialButtons({ isLoading } : { isLoading: boolean}) {
+export function SocialButtons({ isLoading } : { isLoading: boolean}) {
   return <>
     <div className='relative my-2'>
       <div className='absolute inset-0 flex items-center'>

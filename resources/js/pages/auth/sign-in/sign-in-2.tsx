@@ -1,7 +1,7 @@
 import ViteLogo from '@/assets/vite.svg'
 import { UserAuthForm } from './components/user-auth-form'
 import {Head, Link} from '@inertiajs/react'
-import SocialButtons from "@/pages/auth/components/social-buttons";
+import {TermPrivacyLink, SocialButtons} from "@/pages/auth/components";
 
 export default function SignIn2({
     status,
@@ -58,27 +58,14 @@ export default function SignIn2({
               <h1 className='text-2xl font-semibold tracking-tight'>Login</h1>
               <p className='text-sm text-muted-foreground'>
                 Enter your email and password below <br/>
-                to log into your account, do not have an account? <Link href={route('register')}>Register</Link>
+                to log into your account, do not have an account?
+                <Link
+                  className='underline underline-offset-4 hover:text-primary'
+                  href={route('register')}>Register</Link>
               </p>
             </div>
             <UserAuthForm canResetPassword={canResetPassword} status={status} />
-            <p className='px-8 text-center text-sm text-muted-foreground'>
-              By clicking login, you agree to our{' '}
-              <a
-                href='/terms'
-                className='underline underline-offset-4 hover:text-primary'
-              >
-                Terms of Service
-              </a>{' '}
-              and{' '}
-              <a
-                href='/privacy'
-                className='underline underline-offset-4 hover:text-primary'
-              >
-                Privacy Policy
-              </a>
-              .
-            </p>
+            <TermPrivacyLink privacyLink={'#'} termLink={'#'} />
             <SocialButtons isLoading={false}/>
           </div>
         </div>

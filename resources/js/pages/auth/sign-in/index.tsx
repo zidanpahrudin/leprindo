@@ -1,9 +1,7 @@
 import { Card } from '@/components/ui/card'
 import AuthLayout from '../auth-layout'
 import { UserAuthForm } from './components/user-auth-form'
-import {useForm} from "@inertiajs/react"
-import {FormEventHandler} from "react";
-import SocialButtons from '../components/social-buttons'
+import {TermPrivacyLink, SocialButtons} from "@/pages/auth/components";
 
 export default function SignIn({
   status,
@@ -12,20 +10,6 @@ export default function SignIn({
   status?: string;
   canResetPassword: boolean;
 }) {
-
-  const { post, reset } = useForm({
-    email: '',
-    password: '',
-    remember: false,
-  });
-
-  const submit: FormEventHandler = (e) => {
-    e.preventDefault();
-
-    post(route('login'), {
-      onFinish: () => reset('password'),
-    });
-  }
   return (
     <AuthLayout title={"Login"}>
       <Card className='p-6'>
@@ -37,23 +21,7 @@ export default function SignIn({
           </p>
         </div>
         <UserAuthForm canResetPassword={canResetPassword} status={status} />
-        <p className='mt-4 px-8 text-center text-sm text-muted-foreground'>
-          By clicking login, you agree to our{' '}
-          <a
-            href='/terms'
-            className='underline underline-offset-4 hover:text-primary'
-          >
-            Terms of Service
-          </a>{' '}
-          and{' '}
-          <a
-            href='/privacy'
-            className='underline underline-offset-4 hover:text-primary'
-          >
-            Privacy Policy
-          </a>
-          .
-        </p>
+        <TermPrivacyLink privacyLink={'#'} termLink={'#'} />
         <SocialButtons isLoading={false}/>
       </Card>
     </AuthLayout>
