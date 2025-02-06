@@ -1,6 +1,6 @@
 import ViteLogo from '@/assets/vite.svg'
 import { UserAuthForm } from './components/user-auth-form'
-import { Head } from '@inertiajs/react'
+import {Head, Link} from '@inertiajs/react'
 import SocialButtons from "@/pages/auth/components/social-buttons";
 
 export default function SignIn2({
@@ -58,7 +58,7 @@ export default function SignIn2({
               <h1 className='text-2xl font-semibold tracking-tight'>Login</h1>
               <p className='text-sm text-muted-foreground'>
                 Enter your email and password below <br/>
-                to log into your account
+                to log into your account, do not have an account? <Link href={route('register')}>Register</Link>
               </p>
             </div>
             <UserAuthForm canResetPassword={canResetPassword} status={status} />
