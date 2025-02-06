@@ -17,6 +17,7 @@ Route::group(['prefix' => '/settings'], function () {
 
 Route::get('/apps', fn () => Inertia::render('apps/index'))->name('dashboard.apps');
 Route::get('/chats', fn () => Inertia::render('chats/index'))->name('dashboard.chats');
+Route::get('/charts', fn () => Inertia::render('charts/index'))->name('dashboard.charts');
 Route::get('/tasks', fn () => Inertia::render('tasks/index'))->name('dashboard.tasks');
 Route::get('/users', fn () => Inertia::render('users/index'))->name('dashboard.users');
 Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
