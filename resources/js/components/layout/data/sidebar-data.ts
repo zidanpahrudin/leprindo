@@ -18,6 +18,9 @@ import {
   IconUserCog,
   IconUserOff,
   IconUsers,
+  IconChartBar,
+  IconShoppingBag,
+  IconShoppingBagDiscount,
 } from '@tabler/icons-react'
 import { AudioWaveform, Command, GalleryVerticalEnd } from 'lucide-react'
 import { type SidebarData } from '../types'
@@ -69,6 +72,21 @@ export const sidebarData: SidebarData = {
           url: '/dashboard/chats',
           badge: '3',
           icon: IconMessages,
+        },
+        {
+          title: 'Charts',
+          url: '/dashboard/charts',
+          icon: IconChartBar,
+        },
+        {
+          title: 'Orders',
+          url: '/dashboard/orders',
+          icon: IconShoppingBag,
+        },
+        {
+          title: 'Products',
+          url: '/dashboard/products',
+          icon: IconShoppingBagDiscount,
         },
         {
           title: 'Users',
