@@ -14,30 +14,36 @@ import {ThemeSwitch} from "@/components/theme-switch"
 import {Separator} from "@/components/ui/separator";
 import SidebarNav from "@/pages/settings/components/sidebar-nav";
 import {Main} from "@/components/layout";
-import {IconBrowserCheck, IconNotification, IconPalette, IconTool, IconUser} from "@tabler/icons-react";
+import {
+  IconBrowserCheck,
+  IconNotification,
+  IconPalette,
+  IconTool,
+  IconUser
+} from "@tabler/icons-react";
 
 const topNav = [
   {
     title: 'Overview',
-    href: 'dashboard/overview',
+    href: '/dashboard',
     isActive: true,
     disabled: false,
   },
   {
     title: 'Customers',
-    href: 'dashboard/customers',
+    href: '/dashboard/users',
     isActive: false,
     disabled: true,
   },
   {
     title: 'Products',
-    href: 'dashboard/products',
+    href: '/dashboard/products',
     isActive: false,
     disabled: true,
   },
   {
     title: 'Settings',
-    href: 'dashboard/settings',
+    href: '/dashboard/settings',
     isActive: false,
     disabled: true,
   },
