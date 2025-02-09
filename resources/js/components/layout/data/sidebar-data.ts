@@ -21,6 +21,7 @@ import {
   IconChartBar,
   IconShoppingBag,
   IconShoppingBagDiscount,
+  IconShoe
 } from '@tabler/icons-react'
 import { AudioWaveform, Command, GalleryVerticalEnd } from 'lucide-react'
 import { type SidebarData } from '../types'
@@ -97,6 +98,11 @@ export const sidebarData: SidebarData = {
           title: 'Products',
           url: '/dashboard/products',
           icon: IconShoppingBagDiscount,
+        },
+        {
+          title: 'Product',
+          url: '/dashboard/products/edit',
+          icon: IconShoe,
         },
       ],
     },
