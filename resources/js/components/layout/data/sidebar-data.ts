@@ -79,6 +79,16 @@ export const sidebarData: SidebarData = {
           icon: IconChartBar,
         },
         {
+          title: 'Users',
+          url: '/dashboard/users',
+          icon: IconUsers,
+        },
+      ],
+    },
+    {
+      title: 'Ecommerce',
+      items: [
+        {
           title: 'Orders',
           url: '/dashboard/orders',
           icon: IconShoppingBag,
@@ -87,11 +97,6 @@ export const sidebarData: SidebarData = {
           title: 'Products',
           url: '/dashboard/products',
           icon: IconShoppingBagDiscount,
-        },
-        {
-          title: 'Users',
-          url: '/dashboard/users',
-          icon: IconUsers,
         },
       ],
     },
