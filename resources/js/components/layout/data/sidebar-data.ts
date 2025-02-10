@@ -21,9 +21,14 @@ import {
   IconChartBar,
   IconShoppingBag,
   IconShoppingBagDiscount,
-  IconShoe
+  IconShoe,
+  IconRobot,
 } from '@tabler/icons-react'
-import { AudioWaveform, Command, GalleryVerticalEnd } from 'lucide-react'
+import {
+  AudioWaveform,
+  Command,
+  GalleryVerticalEnd
+} from 'lucide-react'
 import { type SidebarData } from '../types'
 
 export const sidebarData: SidebarData = {
@@ -73,6 +78,11 @@ export const sidebarData: SidebarData = {
           url: '/dashboard/chats',
           badge: '3',
           icon: IconMessages,
+        },
+        {
+          title: 'Ai Chats',
+          url: '/dashboard/chat-ai',
+          icon: IconRobot,
         },
         {
           title: 'Charts',
