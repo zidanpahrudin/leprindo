@@ -25,7 +25,7 @@ Route::get('/500', fn () => Inertia::render('errors/general-error'));
 Route::get('/503', fn () => Inertia::render('errors/maintenance-error'));
 
 Route::group(['prefix' => '/dashboard'], function () {
-  require __DIR__ . '/dashboard.php';
+    require __DIR__.'/dashboard.php';
 })->middleware(['auth', 'verified']);
 
 require __DIR__.'/auth.php';
