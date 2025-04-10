@@ -1,11 +1,10 @@
 name: Deploy
 
 on:
-  workflow_run:
-    workflows: ["Tests"]
-    types:
-      - completed
-  workflow_dispatch:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
 
 jobs:
   deploy:
@@ -22,11 +21,12 @@ jobs:
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
 
-      - name: Remove existing end user frontend files on server
+      - name: Clean dev files to make sure everything is clean before deploy
         run: |
-          echo "Removing existing frontend files..."
-          ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "rm -rf ${{ secrets.WORK_DIR }}/resources/js"
-          echo "Existing frontend files removed."
+          echo "Clean old dev files ..."
+          ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "cd ${{ secrets.WORK_DIR }} && rm -rf resources/js"
+          ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "cd ${{ secrets.WORK_DIR }} && rm -rf *.*"
+          echo "Dev files clean"
 
       - name: Deploy code using rsync
         run: |
@@ -38,38 +38,45 @@ jobs:
           $GITHUB_WORKSPACE/ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ secrets.WORK_DIR }}/
           echo "Code deployment completed."
 
+      - name: Restart Docker containers
+        run: |
+          echo "Restarting Docker containers..."
+          ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "cd ${{ secrets.DOCKER_DIR }} && docker compose down"
+          ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "cd ${{ secrets.DOCKER_DIR }} && docker compose up -d"
+          echo "Docker containers restarted."
+
       - name: Install backend dependencies on server
         run: |
-          echo "Installing dependencies..."
-          ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "cd ${{ secrets.WORK_DIR }} && composer install"
-          echo "Dependencies installed."
+          echo "Installing backend dependencies..."
+          ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "cd ${{ secrets.WORK_DIR }} && docker exec -i laravel composer install"
+          echo "Backend dependencies installed."
 
       - name: Run database migrations
         run: |
           echo "Running database migrations..."
-          ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "cd ${{ secrets.WORK_DIR }} && php artisan migrate --force"
+          ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "cd ${{ secrets.WORK_DIR }} && docker exec -i laravel php artisan migrate --force"
           echo "Database migrations completed."
 
       - name: Install frontend dependencies on server
         run: |
           echo "Installing frontend dependencies..."
-          ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "cd ${{ secrets.WORK_DIR }} && yarn"
+          ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "cd ${{ secrets.WORK_DIR }} && docker exec -i laravel yarn"
           echo "Frontend dependencies installed."
 
       - name: Build frontend assets
         run: |
           echo "Building frontend assets..."
-          ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "cd ${{ secrets.WORK_DIR }} && yarn build"
+          ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "cd ${{ secrets.WORK_DIR }} && docker exec -i laravel yarn build"
           echo "Frontend assets built."
 
       - name: Clear application cache
         run: |
           echo "Clearing application cache..."
-          ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "cd ${{ secrets.WORK_DIR }} && php artisan cache:clear"
+          ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "cd ${{ secrets.WORK_DIR }} && docker exec -i laravel php artisan cache:clear"
           echo "Application cache cleared."
 
       - name: Optimize Laravel application
         run: |
           echo "Clearing and optimizing application cache..."
-          ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "cd ${{ secrets.WORK_DIR }} && php artisan optimize:clear"
+          ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "cd ${{ secrets.WORK_DIR }} && docker exec -i laravel php artisan optimize:clear"
           echo "Application optimized."
