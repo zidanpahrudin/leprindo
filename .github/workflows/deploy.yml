@@ -28,7 +28,7 @@ jobs:
           ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "cd ${{ secrets.WORK_DIR }} && rm -rf *.*"
           echo "Dev files clean"
 
-      - name: Build frontend assets in GitHub Actions
+      - name: Build frontend assets
         run: |
           echo "Building frontend assets..."
           yarn install
