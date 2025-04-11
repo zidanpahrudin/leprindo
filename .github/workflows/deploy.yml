@@ -19,13 +19,6 @@ jobs:
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
 
-      - name: Clean dev files to make sure everything is clean before deploy
-        run: |
-          echo "Clean old dev files ..."
-          ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "cd ${{ secrets.WORK_DIR }} && rm -rf resources/js"
-          ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "cd ${{ secrets.WORK_DIR }} && rm -rf *.*"
-          echo "Dev files clean"
-
       - name: Build frontend assets
         run: |
           echo "Building frontend assets..."
