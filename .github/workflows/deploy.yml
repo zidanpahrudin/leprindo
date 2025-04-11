@@ -60,8 +60,10 @@ jobs:
           --exclude package.json \
           --exclude yarn.lock \
           --exclude package-lock.json \
+          --exclude tsconfig.json \
           --exclude phpunit.xml \
           --exclude *.js \
+          --exclude *.config.js \
           --exclude resources/js \
           --exclude resources/css \
           $GITHUB_WORKSPACE/ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ secrets.WORK_DIR }}/
