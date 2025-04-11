@@ -43,7 +43,7 @@ jobs:
         run: |
           echo "Starting rsync deployment..."
           rsync -avz -e "ssh -o StrictHostKeyChecking=no" \
-          --exclude .env\
+          --exclude .env \
           --exclude .env.example \
           --exclude .git \
           --exclude .github \
@@ -60,6 +60,8 @@ jobs:
           --exclude package.json \
           --exclude yarn.lock \
           --exclude package-lock.json \
+          --exclude phpunit.xml \
+          --exclude *.js \
           --exclude resources/js \
           --exclude resources/css \
           $GITHUB_WORKSPACE/ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ secrets.WORK_DIR }}/
