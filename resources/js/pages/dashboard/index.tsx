@@ -189,7 +189,7 @@ export default function Dashboard() {
             </TabsContent>
 
             <TabsContent value='reports' className='space-y-4'>
-              <div className='grid flex-1 scroll-mt-20 items-start gap-10 md:grid-cols-2 md:gap-6 lg:grid-cols-3'>
+              <div className='grid flex-1 scroll-mt-20 items-start gap-10 md:grid-cols-2 md:gap-4 lg:grid-cols-3'>
                 <AreaChartDemo />
                 <BarChartHorizontal />
                 <BarChartMultiple />
