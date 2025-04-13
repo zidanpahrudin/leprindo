@@ -19,10 +19,12 @@ import {RadialChartShape} from "./reports/RadialChartShape"
 import {BarChartHorizontal} from "./reports/BarChartHorizontal"
 import {BarChartSingle} from "./reports/BarChartSingle"
 import {LineChartMultiple} from "./reports/LineChartMultiple"
+import {BarChartActive} from "./reports/BarChartActive"
 import {PieChartDemo} from "./reports/PieChartDemo"
 import {PieChartDonut} from "./reports/PieChartDonut"
 import {PieChartInteractive} from "./reports/PieChartInteractive"
 import {RadialChartLabel} from "./reports/RadialChartLabel"
+import {RadialChartText} from "./reports/RadialChartText";
 
 export default function Dashboard() {
   return (
@@ -193,11 +195,13 @@ export default function Dashboard() {
                 <BarChartMultiple />
                 <BarChartSingle />
                 <LineChartMultiple />
+                <BarChartActive />
                 <RadialChartLabel />
                 <PieChartInteractive />
                 <RadialChartShape />
                 <PieChartDonut />
                 <PieChartDemo />
+                <RadialChartText />
               </div>
             </TabsContent>
           </Tabs>
