@@ -11,6 +11,8 @@ import {Tabs, TabsContent, TabsList, TabsTrigger} from '@/components/ui/tabs'
 import {Main} from '@/components/layout/main'
 import {Overview} from './overview'
 import {RecentSales} from './recent-sales'
+import {BarChartExample} from "./analytics/BarChartExample";
+import {LineChartExample} from "./analytics/LineChartExample";
 
 export default function Dashboard() {
   return (
@@ -31,7 +33,7 @@ export default function Dashboard() {
             <div className='w-full overflow-x-auto pb-2'>
               <TabsList>
                 <TabsTrigger value='overview'>Overview</TabsTrigger>
-                <TabsTrigger value='analytics' disabled>
+                <TabsTrigger value='analytics'>
                   Analytics
                 </TabsTrigger>
                 <TabsTrigger value='reports' disabled>
@@ -167,6 +169,11 @@ export default function Dashboard() {
                   </CardContent>
                 </Card>
               </div>
+            </TabsContent>
+
+            <TabsContent value='analytics' className='space-y-4'>
+              <BarChartExample />
+              <LineChartExample />
             </TabsContent>
           </Tabs>
         </Main>
