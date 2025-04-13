@@ -54,7 +54,7 @@ const chartConfig = {
   },
 } satisfies ChartConfig
 
-export function Component() {
+export function RadialChartLabel() {
   return (
     <Card className="flex flex-col">
       <CardHeader className="items-center pb-0">

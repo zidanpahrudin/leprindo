@@ -11,8 +11,18 @@ import {Tabs, TabsContent, TabsList, TabsTrigger} from '@/components/ui/tabs'
 import {Main} from '@/components/layout/main'
 import {Overview} from './overview'
 import {RecentSales} from './recent-sales'
-import {BarChartExample} from "./analytics/BarChartExample";
-import {LineChartExample} from "./analytics/LineChartExample";
+import {BarChartExample} from "./analytics/BarChartExample"
+import {LineChartExample} from "./analytics/LineChartExample"
+import {AreaChartDemo} from "./reports/AreaChartDemo"
+import {BarChartMultiple} from "./reports/BarChartMultiple"
+import {RadialChartShape} from "./reports/RadialChartShape"
+import {BarChartHorizontal} from "./reports/BarChartHorizontal"
+import {BarChartSingle} from "./reports/BarChartSingle"
+import {LineChartMultiple} from "./reports/LineChartMultiple"
+import {PieChartDemo} from "./reports/PieChartDemo"
+import {PieChartDonut} from "./reports/PieChartDonut"
+import {PieChartInteractive} from "./reports/PieChartInteractive"
+import {RadialChartLabel} from "./reports/RadialChartLabel"
 
 export default function Dashboard() {
   return (
@@ -36,7 +46,7 @@ export default function Dashboard() {
                 <TabsTrigger value='analytics'>
                   Analytics
                 </TabsTrigger>
-                <TabsTrigger value='reports' disabled>
+                <TabsTrigger value='reports'>
                   Reports
                 </TabsTrigger>
                 <TabsTrigger value='notifications' disabled>
@@ -174,6 +184,21 @@ export default function Dashboard() {
             <TabsContent value='analytics' className='space-y-4'>
               <BarChartExample />
               <LineChartExample />
+            </TabsContent>
+
+            <TabsContent value='reports' className='space-y-4'>
+              <div className='grid flex-1 scroll-mt-20 items-start gap-10 md:grid-cols-2 md:gap-6 lg:grid-cols-3'>
+                <AreaChartDemo />
+                <BarChartHorizontal />
+                <BarChartMultiple />
+                <BarChartSingle />
+                <LineChartMultiple />
+                <RadialChartLabel />
+                <PieChartInteractive />
+                <RadialChartShape />
+                <PieChartDonut />
+                <PieChartDemo />
+              </div>
             </TabsContent>
           </Tabs>
         </Main>

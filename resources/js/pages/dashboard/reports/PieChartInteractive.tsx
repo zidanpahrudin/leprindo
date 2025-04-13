@@ -68,7 +68,7 @@ const chartConfig = {
   },
 } satisfies ChartConfig
 
-export function Component() {
+export function PieChartInteractive() {
   const id = "pie-interactive"
   const [activeMonth, setActiveMonth] = React.useState(desktopData[0].month)
 
