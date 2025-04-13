@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { PasswordInput } from '@/components/password-input'
 import { Checkbox } from '@/components/ui/checkbox'
-import {Label} from "@/components/ui/label"
+import { Label } from "@/components/ui/label"
 import InputError from "@/components/InputError"
 
 type UserAuthFormProps = HTMLAttributes<HTMLDivElement> & {
@@ -13,14 +13,8 @@ type UserAuthFormProps = HTMLAttributes<HTMLDivElement> & {
   canResetPassword?: boolean;
 }
 
-interface FormData {
-  email: string;
-  password: string;
-  remember: boolean;
-}
-
 export function UserAuthForm({ className, status, canResetPassword = true, ...props }: UserAuthFormProps) {
-  const { data, setData, post, processing, errors, reset } = useForm<FormData>({
+  const { data, setData, post, processing, errors, reset } = useForm({
     email: 'shadcn@gmail.com',
     password: 'password',
     remember: false,
@@ -86,7 +80,11 @@ export function UserAuthForm({ className, status, canResetPassword = true, ...pr
             <Checkbox
               id="remember"
               checked={data.remember}
-              onCheckedChange={(checked) => setData('remember', checked as boolean)}
+              onCheckedChange={(checked) => {
+                if (typeof checked === 'boolean') {
+                  setData('remember', checked as typeof data.remember);
+                }
+              }}
             />
             <label htmlFor="remember" className="text-sm font-normal text-muted-foreground">
               Remember me

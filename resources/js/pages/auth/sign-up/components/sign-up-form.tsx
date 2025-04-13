@@ -11,15 +11,8 @@ interface SignUpFormProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
 }
 
-interface FormData {
-  name: string;
-  email: string;
-  password: string;
-  password_confirmation: string;
-}
-
 export function SignUpForm({ className, ...props }: SignUpFormProps) {
-  const { data, setData, post, processing, errors, reset } = useForm<FormData>({
+  const { data, setData, post, processing, errors, reset } = useForm({
     name: '',
     email: '',
     password: '',
@@ -31,8 +24,7 @@ export function SignUpForm({ className, ...props }: SignUpFormProps) {
     post(route('register'), {
       preserveScroll: true,
       onSuccess: () => {
-        reset('password');
-        reset('password_confirmation');
+        reset('password', 'password_confirmation');
       },
     });
   };
