@@ -1,15 +1,16 @@
-import { ThemeToggle } from "@/components/theme/theme-toggle";
-import {Head} from "@inertiajs/react";
+import { Header } from "./header";
+import { PropsWithChildren } from 'react';
 
 export function PageLayout({
     children,
     title,
-  }: any) {
+  }: PropsWithChildren<{ title?: string }>) {
   return (
     <>
-      <Head title={title ?? 'Shadcn Admin by @Kai from Binjuhor'}/>
-      <ThemeToggle/>
-      {children}
+      <Header title={title}/>
+      <main>
+        {children}
+      </main>
     </>
   )
 }
