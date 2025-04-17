@@ -20,7 +20,7 @@ This project is inspired by [Shadcn-admin](https://github.com/satnaing/shadcn-ad
 
 **UI:** [ShadcnUI](https://ui.shadcn.com) (TailwindCSS + RadixUI)
 
-**Backend:** [Laravel](https://laravel.com/) 11.x 
+**Backend:** [Laravel](https://laravel.com/) 11.x
 
 **Frontend Integration:** [InertiaJs](https://inertiajs.com/)
 
@@ -67,9 +67,16 @@ This project is inspired by [Shadcn-admin](https://github.com/satnaing/shadcn-ad
 ```
 
 4. Start the dev
+Frotnedend and Backend server
+- Start the Vite development server:
 
 ```bash
   pnpm run dev
+```
+- Start the Laravel development server:
+
+```bash
+  php artisan serve
 ```
 
 5. Open your browser and visit http://localhost:8000 to view the dashboard.
