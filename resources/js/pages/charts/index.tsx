@@ -33,7 +33,7 @@ import {
   ChartTooltipContent,
 } from "@/components/ui/chart"
 import { Separator } from "@/components/ui/separator"
-import {AuthenticatedLayout} from "@/layouts"
+import { AuthenticatedLayout } from "@/layouts"
 import { Main } from "@/components/layout"
 
 export const description = "A collection of health charts."

@@ -23,6 +23,7 @@ Route::get('/403', fn () => Inertia::render('errors/forbidden'));
 Route::get('/404', fn () => Inertia::render('errors/not-found-error'));
 Route::get('/500', fn () => Inertia::render('errors/general-error'));
 Route::get('/503', fn () => Inertia::render('errors/maintenance-error'));
+Route::get('/pricing', fn () => Inertia::render('pricing/index'));
 
 Route::group(['prefix' => '/dashboard'], function () {
     require __DIR__.'/dashboard.php';
