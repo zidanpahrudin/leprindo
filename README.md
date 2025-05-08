@@ -20,7 +20,7 @@ This project is inspired by [Shadcn-admin](https://github.com/satnaing/shadcn-ad
 
 **UI:** [ShadcnUI](https://ui.shadcn.com) (TailwindCSS + RadixUI)
 
-**Backend:** [Laravel](https://laravel.com/) 11.x
+**Backend:** [Laravel](https://laravel.com/) 12.x
 
 **Frontend Integration:** [InertiaJs](https://inertiajs.com/)
 
