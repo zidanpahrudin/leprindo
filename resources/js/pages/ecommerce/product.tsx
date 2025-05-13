@@ -1,4 +1,4 @@
-import {AuthenticatedLayout} from "@/layouts";
+import {AuthenticatedLayout} from "@/layouts"
 import {
   ChevronLeft,
   PlusCircle,

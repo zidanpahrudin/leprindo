@@ -23,6 +23,7 @@ import {
   IconShoppingBagDiscount,
   IconShoe,
   IconRobot,
+  IconMail,
 } from '@tabler/icons-react'
 import {
   AudioWaveform,
@@ -67,6 +68,11 @@ export const sidebarData: SidebarData = {
           title: 'Tasks',
           url: '/dashboard/tasks',
           icon: IconChecklist,
+        },
+        {
+          title: 'Mail',
+          url: '/dashboard/mail',
+          icon: IconMail,
         },
         {
           title: 'Apps',

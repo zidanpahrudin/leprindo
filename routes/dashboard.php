@@ -18,6 +18,7 @@ Route::group(['prefix' => '/settings'], function () {
 Route::get('/apps', fn () => Inertia::render('apps/index'))->name('dashboard.apps');
 Route::get('/chats', fn () => Inertia::render('chats/index'))->name('dashboard.chats');
 Route::get('/charts', fn () => Inertia::render('charts/index'))->name('dashboard.charts');
+Route::get('/mail', fn () => Inertia::render('mail/index'))->name('dashboard.mail');
 Route::get('/orders', fn () => Inertia::render('ecommerce/orders'))->name('dashboard.ecommerce.orders');
 Route::get('/products', fn () => Inertia::render('ecommerce/products'))->name('dashboard.ecommerce.products');
 Route::get('/products/edit', fn () => Inertia::render('ecommerce/product'))->name('dashboard.ecommerce.products.edit');
