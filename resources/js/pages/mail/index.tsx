@@ -35,30 +35,33 @@ export default function MailPage() {
     <>
       <AuthenticatedLayout title="Mails">
         <Main>
-          <div className="md:hidden">
-            <img
-              src="/examples/mail-dark.png"
-              width={1280}
-              height={727}
-              alt="Mail"
-              className="hidden dark:block"
-            />
-            <img
-              src="/examples/mail-light.png"
-              width={1280}
-              height={727}
-              alt="Mail"
-              className="block dark:hidden"
-            />
-          </div>
-          <div className="hidden flex-col md:flex">
-            <Mail
-              accounts={accounts}
-              mails={mails}
-              defaultLayout={defaultLayout}
-              defaultCollapsed={defaultCollapsed}
-              navCollapsedSize={4}
-            />
+          <div className="rounded-xl border bg-card text-card-foreground shadow-sm">
+
+            <div className="md:hidden">
+              <img
+                src="/examples/mail-dark.png"
+                width={1280}
+                height={727}
+                alt="Mail"
+                className="hidden dark:block"
+              />
+              <img
+                src="/examples/mail-light.png"
+                width={1280}
+                height={727}
+                alt="Mail"
+                className="block dark:hidden"
+              />
+            </div>
+            <div className="hidden flex-col md:flex">
+              <Mail
+                accounts={accounts}
+                mails={mails}
+                defaultLayout={defaultLayout}
+                defaultCollapsed={defaultCollapsed}
+                navCollapsedSize={4}
+              />
+            </div>
           </div>
         </Main>
       </AuthenticatedLayout>
