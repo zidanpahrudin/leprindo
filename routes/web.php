@@ -4,15 +4,16 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
-Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
-});
+//Route::get('/', function () {
+//    return Inertia::render('Welcome', [
+//        'canLogin' => Route::has('login'),
+//        'canRegister' => Route::has('register'),
+//        'laravelVersion' => Application::VERSION,
+//        'phpVersion' => PHP_VERSION,
+//    ]);
+//});
 
+Route::get('/', fn () => Inertia::render('auth/sign-in/sign-in-2'));
 Route::get('/sign-in', fn () => Inertia::render('auth/sign-in/index'));
 Route::get('/sign-in-2', fn () => Inertia::render('auth/sign-in/sign-in-2'));
 Route::get('/sign-up', fn () => Inertia::render('auth/sign-up/index'));
