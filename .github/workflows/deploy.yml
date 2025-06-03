@@ -48,8 +48,7 @@ jobs:
       - name: Restart Docker containers
         run: |
           echo "Restarting Docker containers..."
-          ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "cd ${{ secrets.DOCKER_DIR }} && docker compose down"
-          ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "cd ${{ secrets.DOCKER_DIR }} && docker compose up -d"
+          ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "cd ${{ secrets.DOCKER_DIR }} && docker compose restart"
           echo "Docker containers restarted."
 
       - name: Run database migrations
