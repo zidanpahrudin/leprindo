@@ -32,6 +32,12 @@ jobs:
           composer install --no-dev --optimize-autoloader
           echo "Backend dependencies installed."
 
+      - name: Create Directory Permissions
+        run: mkdir -p storage/framework/{cache,sessions,views}
+
+      - name: Directory Permissions
+        run: chmod -R 777 storage bootstrap/cache
+
       - name: Deploy code using rsync
         run: |
           echo "Starting rsync deployment..."
