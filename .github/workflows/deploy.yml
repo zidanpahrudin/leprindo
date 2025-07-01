@@ -32,6 +32,12 @@ jobs:
           composer install --no-dev --optimize-autoloader
           echo "Backend dependencies installed."
 
+      - name: Create Directory Permissions
+        run: mkdir -p storage/framework/{cache,sessions,views}
+
+      - name: Directory Permissions
+        run: chmod -R 777 storage bootstrap/cache
+
       - name: Deploy code using rsync
         run: |
           echo "Starting rsync deployment..."
@@ -44,6 +50,12 @@ jobs:
           --exclude resources/js --exclude resources/css \
           $GITHUB_WORKSPACE/ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ secrets.WORK_DIR }}/
           echo "Code deployment completed."
+
+      - name: Create Directory Permissions on Remote
+        run: |
+          echo "Setting directory permissions on remote server..."
+          ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "mkdir -p ${{ secrets.WORK_DIR }}/storage/framework/{cache,sessions,views} && chmod -R 777 ${{ secrets.WORK_DIR }}/storage ${{ secrets.WORK_DIR }}/bootstrap/cache"
+          echo "Directory permissions set."
 
       - name: Restart Docker containers
         run: |
