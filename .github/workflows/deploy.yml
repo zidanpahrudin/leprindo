@@ -29,10 +29,9 @@ jobs:
       - name: Deploy code using rsync
         run: |
           echo "Starting rsync deployment..."
-          rsync -avz -e "ssh -o StrictHostKeyChecking=no" \
+          rsync -rlptDzv --no-owner --no-group -e "ssh -o StrictHostKeyChecking=no" \
           --exclude .env --exclude .env.example --exclude .git --exclude .github --exclude .editorconfig \
           --exclude node_modules --exclude tests --exclude storage --exclude .gitattributes --exclude .gitignore \
-          --exclude vendor \
           --exclude README.md --exclude .env.testing --exclude .prettierrc --exclude components.json \
           --exclude package.json --exclude yarn.lock --exclude package-lock.json --exclude tsconfig.json \
           --exclude phpunit.xml --exclude *.js --exclude tailwind.config.js --exclude vite.config.js \
