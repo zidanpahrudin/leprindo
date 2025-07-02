@@ -44,8 +44,8 @@ jobs:
           echo "Setting directory permissions on remote server..."
           ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "\
           sudo mkdir -p ${{ secrets.WORK_DIR }}/storage/framework/{cache,sessions,views} && \
-          sudo chown -R www-data:www-data ${{ secrets.WORK_DIR }}/storage ${{ secrets.WORK_DIR }}/bootstrap/cache && \
-          sudo chmod -R 775 ${{ secrets.WORK_DIR }}/storage ${{ secrets.WORK_DIR }}/bootstrap/cache"
+          docker exec -i laravel chown -R $USER:$USER ./storage ./bootstrap/cache && \
+          docker exec -i laravel chmod -R 775 ./storage ./bootstrap/cache"
           echo "Directory permissions set."
 
       - name: Restart Docker containers
