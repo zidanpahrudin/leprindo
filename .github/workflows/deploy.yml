@@ -38,16 +38,6 @@ jobs:
           --exclude resources/js --exclude resources/css \
           $GITHUB_WORKSPACE/ ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ secrets.WORK_DIR }}/
           echo "Code deployment completed."
-
-      - name: Create Directory Permissions on Remote
-        run: |
-          echo "Setting directory permissions on remote server..."
-          ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "\
-          sudo mkdir -p ${{ secrets.WORK_DIR }}/storage/framework/{cache,sessions,views} && \
-          docker exec -i laravel chown -R $USER:$USER ./storage ./bootstrap/cache && \
-          docker exec -i laravel chmod -R 775 ./storage ./bootstrap/cache"
-          echo "Directory permissions set."
-
       - name: Restart Docker containers
         run: |
           echo "Restarting Docker containers..."
