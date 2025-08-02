@@ -37,8 +37,13 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import { Main } from "@/components/layout"
+import { Content } from "@tiptap/react"
+import { MinimalTiptapEditor } from "@/components/ui/minimal-tiptap";
+import { useState } from "react"
 
 export default function Product() {
+  const [value, setValue] = useState<Content>("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nisl nec ultricies ultricies, nunc nisl ultricies nunc, nec ultricies nunc nisl nec nunc.")
+
   return (
     <>
       <AuthenticatedLayout title="Orders">
@@ -85,10 +90,16 @@ export default function Product() {
                         </div>
                         <div className="grid gap-3">
                           <Label htmlFor="description">Description</Label>
-                          <Textarea
-                            id="description"
-                            defaultValue="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nisl nec ultricies ultricies, nunc nisl ultricies nunc, nec ultricies nunc nisl nec nunc."
-                            className="min-h-32"
+                          <MinimalTiptapEditor
+                            value={value}
+                            onChange={setValue}
+                            className="w-full"
+                            editorContentClassName="p-5"
+                            output="html"
+                            placeholder="Enter your description..."
+                            autofocus={false}
+                            editable={true}
+                            editorClassName="focus:outline-none"
                           />
                         </div>
                       </div>
