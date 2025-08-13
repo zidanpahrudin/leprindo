@@ -14,16 +14,23 @@ interface ToolbarButtonProps extends React.ComponentProps<typeof Toggle> {
   tooltipOptions?: TooltipContentProps
 }
 
-export const ToolbarButton = ({
+export const ToolbarButton = React.forwardRef<
+  React.ElementRef<typeof Toggle>,
+  ToolbarButtonProps
+>(({
   isActive,
   children,
   tooltip,
   className,
   tooltipOptions,
   ...props
-}: ToolbarButtonProps) => {
+}, ref) => {
   const toggleButton = (
-    <Toggle className={cn({ "bg-accent": isActive }, className)} {...props}>
+    <Toggle 
+      ref={ref}
+      className={cn({ "bg-accent": isActive }, className)} 
+      {...props}
+    >
       {children}
     </Toggle>
   )
@@ -40,7 +47,7 @@ export const ToolbarButton = ({
       </TooltipContent>
     </Tooltip>
   )
-}
+})
 
 ToolbarButton.displayName = "ToolbarButton"
 
