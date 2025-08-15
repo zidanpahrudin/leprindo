@@ -36,13 +36,15 @@ import {
 } from "@/components/ui/popover"
 import { Separator } from "@/components/ui/separator"
 import { Switch } from "@/components/ui/switch"
-import { Textarea } from "@/components/ui/textarea"
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip"
 import { Mail } from "@/pages/mail/data"
+import { Content } from "@tiptap/react"
+import {MinimalTiptapEditor} from "@/components/ui/minimal-tiptap";
+import { useState } from "react"
 
 interface MailDisplayProps {
   mail: Mail | null
@@ -50,6 +52,7 @@ interface MailDisplayProps {
 
 export function MailDisplay({ mail }: MailDisplayProps) {
   const today = new Date()
+  const [value, setValue] = useState<Content>("")
 
   return (
     <div className="flex h-full flex-col">
@@ -224,9 +227,16 @@ export function MailDisplay({ mail }: MailDisplayProps) {
           <div className="p-4">
             <form>
               <div className="grid gap-4">
-                <Textarea
-                  className="p-4"
+                <MinimalTiptapEditor
+                  value={value}
+                  onChange={setValue}
+                  className="w-full text-sm"
+                  editorContentClassName="p-5"
+                  output="html"
                   placeholder={`Reply ${mail.name}...`}
+                  autofocus={false}
+                  editable={true}
+                  editorClassName="focus:outline-none"
                 />
                 <div className="flex items-center">
                   <Label
