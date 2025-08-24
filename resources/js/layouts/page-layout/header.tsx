@@ -19,7 +19,7 @@ export const Header = ({ title } : any) => {
         <span>Shadcn Admin</span>
       </h1>
       <nav className="flex items-center gap-4">
-        <Link
+        <a
           target="_blank"
           href="https://github.com/binjuhor/shadcn-admin"
         >
@@ -31,7 +31,7 @@ export const Header = ({ title } : any) => {
           >
             Github
           </Button>
-        </Link>
+        </a>
         <ThemeToggle />
       </nav>
     </header>
