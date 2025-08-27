@@ -20,7 +20,7 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import { Main } from "@/components/layout"
-import { BlogPost } from "@/types/blog"
+import type { BlogPost } from "@/types/blog"
 
 const mockBlogPost: BlogPost = {
   id: 1,
