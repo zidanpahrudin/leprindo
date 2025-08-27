@@ -24,6 +24,10 @@ import {
   IconShoe,
   IconRobot,
   IconMail,
+  IconArticle,
+  IconCategory,
+  IconTags,
+  IconEdit,
 } from '@tabler/icons-react'
 import {
   AudioWaveform,
@@ -119,6 +123,31 @@ export const sidebarData: SidebarData = {
           title: 'Product',
           url: '/dashboard/products/edit',
           icon: IconShoe,
+        },
+      ],
+    },
+    {
+      title: 'Blog',
+      items: [
+        {
+          title: 'Posts',
+          url: '/dashboard/blog/posts',
+          icon: IconArticle,
+        },
+        {
+          title: 'Add Post',
+          url: '/dashboard/blog/posts/create',
+          icon: IconEdit,
+        },
+        {
+          title: 'Categories',
+          url: '/dashboard/blog/categories',
+          icon: IconCategory,
+        },
+        {
+          title: 'Tags',
+          url: '/dashboard/blog/tags',
+          icon: IconTags,
         },
       ],
     },

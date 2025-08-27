@@ -22,6 +22,15 @@ Route::get('/mail', fn () => Inertia::render('mail/index'))->name('dashboard.mai
 Route::get('/orders', fn () => Inertia::render('ecommerce/orders'))->name('dashboard.ecommerce.orders');
 Route::get('/products', fn () => Inertia::render('ecommerce/products'))->name('dashboard.ecommerce.products');
 Route::get('/products/edit', fn () => Inertia::render('ecommerce/product'))->name('dashboard.ecommerce.products.edit');
+
+Route::group(['prefix' => '/blog'], function () {
+    Route::get('/posts', fn () => Inertia::render('blog/posts'))->name('dashboard.blog.posts');
+    Route::get('/posts/create', fn () => Inertia::render('blog/create-post'))->name('dashboard.blog.posts.create');
+    Route::get('/posts/{id}', fn ($id) => Inertia::render('blog/post'))->name('dashboard.blog.posts.show');
+    Route::get('/posts/{id}/edit', fn ($id) => Inertia::render('blog/create-post'))->name('dashboard.blog.posts.edit');
+    Route::get('/categories', fn () => Inertia::render('blog/categories'))->name('dashboard.blog.categories');
+    Route::get('/tags', fn () => Inertia::render('blog/tags'))->name('dashboard.blog.tags');
+});
 Route::get('/tasks', fn () => Inertia::render('tasks/index'))->name('dashboard.tasks');
 Route::get('/users', fn () => Inertia::render('users/index'))->name('dashboard.users');
 Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
