@@ -81,6 +81,69 @@ Frotnedend and Backend server
 
 5. Open your browser and visit http://localhost:8000 to view the dashboard.
 
+## CI/CD Guide
+
+This project includes automated CI/CD workflows using GitHub Actions. The workflows are located in the `.github/workflows/` directory and provide continuous integration and deployment capabilities.
+
+### Available Workflows
+
+#### 1. Tests Workflow (`test.yml`)
+Automatically runs on every push to the `main` branch and performs:
+
+- **PHP Setup:** Uses PHP 8.2 with required extensions
+- **Environment Setup:** Copies `.env.example` to `.env` and generates application key
+- **Dependencies:** Installs Composer dependencies
+- **Frontend Build:** Installs Node.js dependencies and builds production assets
+- **Database Setup:** Creates SQLite database for testing
+- **Test Execution:** Runs PHPUnit/Pest tests (unit and feature tests)
+
+#### 2. Deploy Workflow (`deploy.yml`) 
+Automatically deploys to production server on successful pushes to `main` branch:
+
+- **Code Deployment:** Uses rsync to sync code to production server
+- **Frontend Build:** Builds production assets before deployment
+- **Dependencies:** Installs/updates Composer dependencies via Docker
+- **Database Migration:** Runs Laravel migrations
+- **Cache Management:** Clears and optimizes application cache
+- **Docker Integration:** Restarts Docker containers for updated services
+
+### Required Secrets
+
+For the deployment workflow to work, configure these GitHub repository secrets:
+
+- `PRIVATE_KEY` - SSH private key for server access
+- `SSH_HOST` - Production server hostname/IP
+- `SSH_USER` - SSH username for server access  
+- `WORK_DIR` - Application directory path on server
+- `DOCKER_DIR` - Docker compose directory path on server
+
+### Local Development Workflow
+
+1. **Before Committing:**
+   ```bash
+   # Run tests locally
+   php artisan test
+   
+   # Build frontend assets
+   pnpm run build
+   
+   # Check code formatting
+   pnpm run lint
+   ```
+
+2. **Push to Main:**
+   - Tests workflow runs automatically
+   - If tests pass and on `main` branch, deployment begins
+   - Monitor workflow progress in GitHub Actions tab
+
+### Workflow Customization
+
+To modify the CI/CD behavior:
+
+- **Test Configuration:** Edit `.github/workflows/test.yml`
+- **Deployment Steps:** Edit `.github/workflows/deploy.yml` 
+- **Add Quality Checks:** Consider adding code style checks, static analysis, or security scans
+
 ## Roadmap
 
 Here are some of the planned features for future updates:
