@@ -1,169 +1,146 @@
-# Laravel Shadcn Admin Dashboard
+# Laravel Shadcn Admin Dashboard – Leprindo
 
-A modern, responsive, and accessible admin dashboard built with Shadcn UI, Laravel, and Vite. This project combines the elegance of Shadcn's UI components with the robustness of Laravel's backend framework, providing a seamless development experience.
+Sebuah dashboard admin modern, responsif, dan aksesibel yang dibangun dengan **Shadcn UI**, **Laravel**, dan **Vite**. Proyek ini mengintegrasikan komponen UI dari Shadcn dengan kekuatan backend Laravel serta Inertia.js, sehingga memberikan pengalaman pengembangan yang mulus untuk sistem **Leprindo**.
 
 ![alt text](public/images/shadcn-admin.png)
 
-This project is inspired by [Shadcn-admin](https://github.com/satnaing/shadcn-admin) and adapted to work seamlessly with Laravel and Inertia.js.
+Proyek ini terinspirasi dari [Shadcn-admin](https://github.com/satnaing/shadcn-admin) dan telah diadaptasi agar bekerja dengan Laravel dan Inertia.js.
 
-## Features
+## Fitur
 
-- Light/dark mode
-- Responsive
-- Accessible
-- With built-in Sidebar component
-- Global Search Command
-- 10+ pages
-- Extra custom components
+* Mode terang/gelap
+* Responsif
+* Aksesibel
+* Sidebar bawaan
+* Pencarian global (Command Search)
+* Lebih dari 10 halaman siap pakai
+* Komponen kustom tambahan
 
-## Tech Stack
+## Teknologi yang Digunakan
 
 **UI:** [ShadcnUI](https://ui.shadcn.com) (TailwindCSS + RadixUI)
-
 **Backend:** [Laravel](https://laravel.com/) 12.x
-
-**Frontend Integration:** [InertiaJs](https://inertiajs.com/)
-
+**Integrasi Frontend:** [InertiaJs](https://inertiajs.com/)
 **Build Tool:** [Vite](https://vitejs.dev/)
-
 **Type Checking:** [TypeScript](https://www.typescriptlang.org/)
-
 **Linting/Formatting:** [Eslint](https://eslint.org/) & [Prettier](https://prettier.io/)
+**Ikon:** [Tabler Icons](https://tabler.io/icons)
 
-**Icons:** [Tabler Icons](https://tabler.io/icons)
+## Menjalankan Secara Lokal
 
-## Run Locally
+1. Clone repositori
 
-1. Clone the project
-
-```bash
-  git clone git@github.com:binjuhor/shadcn-lar.git
-```
-
-2. Go to the project directory
-
-```bash
-  cd shadcn-lar
-```
-
-3. Install dependencies
-
-- Install JavaScript dependencies:
-
-```bash
-  pnpm install
-```
-
-- Install PHP dependencies:
-
-```bash
-  composer install
-```
-
-- Data migration
-
-```bash
-  php artisan migrate
-```
-
-4. Start the dev
-Frotnedend and Backend server
-- Start the Vite development server:
-
-```bash
-  pnpm run dev
-```
-- Start the Laravel development server:
-
-```bash
-  php artisan serve
-```
-
-5. Open your browser and visit http://localhost:8000 to view the dashboard.
-
-## CI/CD Guide
-
-This project includes automated CI/CD workflows using GitHub Actions. The workflows are located in the `.github/workflows/` directory and provide continuous integration and deployment capabilities.
-
-### Available Workflows
-
-#### 1. Tests Workflow (`test.yml`)
-Automatically runs on every push to the `main` branch and performs:
-
-- **PHP Setup:** Uses PHP 8.2 with required extensions
-- **Environment Setup:** Copies `.env.example` to `.env` and generates application key
-- **Dependencies:** Installs Composer dependencies
-- **Frontend Build:** Installs Node.js dependencies and builds production assets
-- **Database Setup:** Creates SQLite database for testing
-- **Test Execution:** Runs PHPUnit/Pest tests (unit and feature tests)
-
-#### 2. Deploy Workflow (`deploy.yml`) 
-Automatically deploys to production server on successful pushes to `main` branch:
-
-- **Code Deployment:** Uses rsync to sync code to production server
-- **Frontend Build:** Builds production assets before deployment
-- **Dependencies:** Installs/updates Composer dependencies via Docker
-- **Database Migration:** Runs Laravel migrations
-- **Cache Management:** Clears and optimizes application cache
-- **Docker Integration:** Restarts Docker containers for updated services
-
-### Required Secrets
-
-For the deployment workflow to work, configure these GitHub repository secrets:
-
-- `PRIVATE_KEY` - SSH private key for server access
-- `SSH_HOST` - Production server hostname/IP
-- `SSH_USER` - SSH username for server access  
-- `WORK_DIR` - Application directory path on server
-- `DOCKER_DIR` - Docker compose directory path on server
-
-### Local Development Workflow
-
-1. **Before Committing:**
    ```bash
-   # Run tests locally
+   git clone git@github.com:binjuhor/leprindo.git
+   ```
+
+2. Masuk ke direktori proyek
+
+   ```bash
+   cd leprindo
+   ```
+
+3. Install dependensi
+
+   * Dependensi JavaScript:
+
+     ```bash
+     pnpm install
+     ```
+   * Dependensi PHP:
+
+     ```bash
+     composer install
+     ```
+   * Migrasi database:
+
+     ```bash
+     php artisan migrate
+     ```
+
+4. Jalankan server pengembangan
+
+   * Server Vite:
+
+     ```bash
+     pnpm run dev
+     ```
+   * Server Laravel:
+
+     ```bash
+     php artisan serve
+     ```
+
+5. Buka browser dan akses [http://localhost:8000](http://localhost:8000) untuk melihat dashboard.
+
+## Panduan CI/CD
+
+Proyek ini menggunakan workflow otomatis dengan **GitHub Actions** yang terdapat di folder `.github/workflows/`. Workflow ini mendukung integrasi berkelanjutan (CI) dan deployment berkelanjutan (CD).
+
+### Workflow yang Tersedia
+
+#### 1. Workflow Tes (`test.yml`)
+
+Berjalan otomatis setiap ada push ke branch `main`:
+
+* Setup PHP 8.2 + ekstensi yang dibutuhkan
+* Setup environment (`.env` dan app key)
+* Install dependensi Composer
+* Build frontend (Node.js + Vite)
+* Setup database SQLite untuk testing
+* Menjalankan tes PHPUnit/Pest
+
+#### 2. Workflow Deploy (`deploy.yml`)
+
+Deployment ke server produksi jika push ke branch `main` berhasil:
+
+* Deploy kode menggunakan rsync
+* Build frontend
+* Install/Update dependensi Composer
+* Menjalankan migrasi database
+* Clear & optimasi cache aplikasi
+* Restart service Docker
+
+### Secret yang Dibutuhkan
+
+* `PRIVATE_KEY` - SSH private key untuk akses server
+* `SSH_HOST` - Hostname/IP server produksi
+* `SSH_USER` - Username SSH
+* `WORK_DIR` - Path direktori aplikasi di server
+* `DOCKER_DIR` - Path direktori Docker compose di server
+
+### Alur Pengembangan Lokal
+
+1. Sebelum commit:
+
+   ```bash
    php artisan test
-   
-   # Build frontend assets
    pnpm run build
-   
-   # Check code formatting
    pnpm run lint
    ```
 
-2. **Push to Main:**
-   - Tests workflow runs automatically
-   - If tests pass and on `main` branch, deployment begins
-   - Monitor workflow progress in GitHub Actions tab
+2. Push ke branch `main`:
 
-### Workflow Customization
+   * Workflow tes otomatis dijalankan
+   * Jika lulus tes → deployment dimulai
+   * Pantau proses di tab GitHub Actions
 
-To modify the CI/CD behavior:
+### Kustomisasi Workflow
 
-- **Test Configuration:** Edit `.github/workflows/test.yml`
-- **Deployment Steps:** Edit `.github/workflows/deploy.yml` 
-- **Add Quality Checks:** Consider adding code style checks, static analysis, or security scans
+* Edit `.github/workflows/test.yml` → konfigurasi tes
+* Edit `.github/workflows/deploy.yml` → langkah deployment
+* Tambahkan quality checks (code style, analisis statis, security scan) bila diperlukan
 
 ## Roadmap
 
-Here are some of the planned features for future updates:
+Fitur yang direncanakan:
 
-- **User Permissions & Roles:** Manage user roles and permissions with a flexible and intuitive system.
+* **Manajemen Role & Permission**
+* **Manajemen Profil Pengguna**
+* **Manajemen Post & Halaman**
+* **Manajemen Tema & Plugin**
+* **Manajemen File & Media**
 
-- **Profile Manager:** Allow users to update their profiles, including personal information and security settings.
+## Lisensi
 
-- **Post & Page Manager:** Create and manage dynamic posts and pages with a rich text editor.
-
-- **Theme & Plugin Manager:** Easily install and manage themes and plugins to extend functionality.
-
-- **File & Media Manager:** A powerful file and media manager for handling uploads and organizing assets.
-
-
-
-## Author
-
-This project was crafted with 🤍 by [@binjuhor](https://github.com/binjuhor)
-
-## License
-
-This project is open-source and licensed under the [MIT License](https://choosealicense.com/licenses/mit/). Feel free to use, modify, and distribute it as needed.
+Proyek ini bersifat open-source dan dilisensikan di bawah [MIT License](https://choosealicense.com/licenses/mit/).
