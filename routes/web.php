@@ -3,6 +3,10 @@
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
+use App\Http\Controllers\MtMenuController;
+use App\Http\Controllers\MenuPermissionController;
+
+
 Route::get('/', fn () => Inertia::render('auth/sign-in/sign-in-2'));
 Route::get('/sign-in', fn () => Inertia::render('auth/sign-in/index'));
 Route::get('/sign-in-2', fn () => Inertia::render('auth/sign-in/sign-in-2'));
@@ -19,5 +23,11 @@ Route::get('/pricing', fn () => Inertia::render('pricing/index'));
 Route::group(['prefix' => '/dashboard', 'middleware' => ['auth', 'verified']], function () {
     require __DIR__.'/dashboard.php';
 });
+
+// routes menu
+Route::apiResource('mt-menu', MtMenuController::class);
+
+// routes menu permission
+Route::apiResource('menu-permission', MenuPermissionController::class);
 
 require __DIR__.'/auth.php';
