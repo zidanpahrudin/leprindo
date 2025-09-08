@@ -29,5 +29,6 @@ Route::apiResource('mt-menu', MtMenuController::class);
 
 // routes menu permission
 Route::apiResource('menu-permission', MenuPermissionController::class);
+Route::get('menu-permission/user/{user_id}', [MenuPermissionController::class, 'getMenuPermissionByUser']);
 
 require __DIR__.'/auth.php';

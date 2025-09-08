@@ -77,4 +77,13 @@ class MenuPermissionController extends Controller
 
         return response()->json(['message' => 'Permission deleted successfully']);
     }
+
+    // get menu permission and relation with mt_menu by user
+    public function getMenuPermissionByUser($user_id)
+    {
+        $permissions = MenuPermission::with(['menu' => function($query) {
+            $query->select('menu_id', 'name');
+        }])->where('user_id', $user_id)->get();
+        return response()->json($permissions);
+    }
 }
