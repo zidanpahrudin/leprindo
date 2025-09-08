@@ -15,6 +15,8 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
+         $this->call(MtMenuSeeder::class);
+        User::where('email', 'shadcn@gmail.com')->delete();
         User::factory()->create([
             'name' => 'Test User',
             'email' => 'shadcn@gmail.com',
