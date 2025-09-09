@@ -5,6 +5,12 @@ use Inertia\Inertia;
 
 use App\Http\Controllers\MtMenuController;
 use App\Http\Controllers\MenuPermissionController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\SalaryController;
+use App\Http\Controllers\SalaryHistoryController;
+
+
+
 
 
 Route::get('/', fn () => Inertia::render('auth/sign-in/sign-in-2'));
@@ -30,5 +36,14 @@ Route::apiResource('mt-menu', MtMenuController::class);
 // routes menu permission
 Route::apiResource('menu-permission', MenuPermissionController::class);
 Route::get('menu-permission/user/{user_id}', [MenuPermissionController::class, 'getMenuPermissionByUser']);
+
+// routse user
+Route::apiResource('users', UserController::class);
+
+// routes salary
+Route::apiResource('salaries', SalaryController::class);
+
+// routes salary history
+Route::apiResource('salary-histories', SalaryHistoryController::class);
 
 require __DIR__.'/auth.php';
